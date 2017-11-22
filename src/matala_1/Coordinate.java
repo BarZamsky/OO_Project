@@ -4,7 +4,6 @@ package matala_1;
  * @author Bar, Noy, Doriya
  *
  */
-// try commit
 public class Coordinate {
 	private double lon;
 	private double lat;
