@@ -69,7 +69,5 @@ public class ParsingFiles extends ReadFiles{
 		filter c1 = list->list.getLocation().getPoints().getAlt()>=650;
 		List<LineFile> filteredStrings = FileFilter.filter(fin,c2);
 		WriteCsv.writeFile(filteredStrings,"filterList.csv");
-
 	}
-
 }

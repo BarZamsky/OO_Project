@@ -12,6 +12,19 @@ import java.util.List;
  *
  */
 public class ReadFiles {
+	private List<LineFile> list;
+	
+	
+	public void List(List<LineFile> list) {
+		this.setList(list);
+	}
+
+	public List<LineFile> getList() {
+		return list;
+	}
+	public void setList(List<LineFile> list) {
+		this.list = list;
+	}
 	//reading the initial file
 	public static List<String[]> readFile(String fileName){
 		List<String[]> file = new ArrayList<String[]>();

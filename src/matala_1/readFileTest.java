@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import matala0.Exe_0;
-
 public class readFileTest {
 
 	@Test
