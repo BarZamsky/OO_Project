@@ -60,7 +60,7 @@ public class Csv2Kml {
 
 	public static void main(String[] args) throws IOException {
 		final Kml kml = new Kml();
-		String name = "C:\\Users\\a\\workspace\\ObjectOriented\\filterlist.csv";
+		String name = "C:/Users/a/git/OO_Project/ObjectOriented/filterList.csv";
 		Document doc = kml.createAndSetDocument().withName("JAK Example1").withOpen(true);
 		Folder folder = doc.createAndAddFolder();
 		folder.withName("Wifi Networks").withOpen(true);
@@ -73,13 +73,11 @@ public class Csv2Kml {
 				double lat = Double.parseDouble(s[2]);
 				double lon = Double.parseDouble(s[3]);
 				for (int i = 6; i < s.length; i+=4) {
-					if(!s[i].equals("null")){
 						createPlacemarkWithChart(doc, folder, s[0] ,s[1], s[i++], s[i++],s[i++], s[i++],  lon	,lat );
-					}
 				}	
 			}
 		}
-		kml.marshal(new File("C:\\Users\\a\\workspace\\ObjectOriented\\final.kml"));
+		kml.marshal(new File("C:\\Users\\a\\workspace\\ObjectOriented\\final2.kml"));
 	}
 }
 
