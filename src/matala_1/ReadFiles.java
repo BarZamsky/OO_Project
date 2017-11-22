@@ -47,7 +47,7 @@ public class ReadFiles {
 		return file;
 	}
 	//reading the merge file
-	static List<String[]> readFile2(String fileName){
+	static List<String[]> readFileMerge(String fileName){
 		List<String[]> file = new ArrayList<>();
 		try {
 			FileReader fr = new FileReader(fileName);
@@ -62,10 +62,6 @@ public class ReadFiles {
 			System.out.print("Error writing file\n" + ex);
 		}
 		return file;
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
