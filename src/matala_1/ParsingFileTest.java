@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import matala0.Exe_0;
 
 public class ParsingFileTest {
 

@@ -16,7 +16,7 @@ public class Folder extends File {
  * @param path the folder location
  * @return true if exist
  */
-	public boolean is_Exist(String path){
+	public static boolean is_Exist(String path){
 		File file = new File(path);
 		if(file.isDirectory()){
 			return true;
@@ -29,7 +29,7 @@ public class Folder extends File {
 	 * @param path location of the folder
 	 * @return array of CSV files in the folder
 	 */
-	public String[] csv_Files(String path){
+	public  String[] csv_Files(String path){
 		File file = new File(path);
 		int counter=0,index=0;
 		String[] files = file.list();

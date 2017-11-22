@@ -17,6 +17,10 @@ public class Model {
 	public void setModel(String model) {
 		Model = model;
 	}
+	
+	public boolean is_Equal(Model m){
+		return this.Model.equals(m);
+	}
 
 	@Override
 	public String toString() {

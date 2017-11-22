@@ -4,6 +4,7 @@ package matala_1;
  * @author Bar, Noy, Doriya
  *
  */
+
 public class Coordinate {
 	private double lon;
 	private double lat;
