@@ -1,5 +1,6 @@
 package matala_1;
 
+//try
 public class Time {
 	private String time;
 	
