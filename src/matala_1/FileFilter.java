@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class reads the merged csv file of WifiNetworks and filtering the file based on ID,TIME or MODEL
+ * This class contains the function for the filter
  * 
  * @author Bar, Noy, Doriya
  *
