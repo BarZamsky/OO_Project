@@ -29,7 +29,7 @@ public class Folder extends File {
 	 * @param path location of the folder
 	 * @return array of CSV files in the folder
 	 */
-	public  String[] csv_Files(String path){
+	public static String[] csv_Files(String path){
 		File file = new File(path);
 		int counter=0,index=0;
 		String[] files = file.list();
