@@ -9,7 +9,7 @@ import java.util.List;
  * @author Bar, Noy, Doriya
  *
  */
-public class FileFilter extends ReadFiles {
+public class FileFilter{
 	/**
 	 * This function filtering the csv file based on the condition inserted
 	 * @param strings - merged list of all csv files 
@@ -24,16 +24,5 @@ public class FileFilter extends ReadFiles {
 			}
 		} 
 			return output;
-	}
-
-	
-	public static void main(String[] args) {
-		Folder f  = new Folder("C:/Users/a/workspace/ObjectOriented") ;
-		String []s = f.csv_Files("C:/Users/a/workspace/ObjectOriented");
-		List<LineFile> fin = new ArrayList<LineFile>();
-		fin = ParsingFiles.merge_File(s);
-		filter c1 = s->s.getLocation().getPoints().getAlt()>=650;
-		List<LineFile> filteredStrings = filter(fin,c1);
-		WriteCsv.writeFile(filteredStrings,"filterList.csv");
 	}
 }

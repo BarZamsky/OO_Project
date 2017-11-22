@@ -6,7 +6,7 @@ import matala_1.WriteCsv;
 
 /**
  * This class creates a new parse CSV file base on wifiNetworks that was captured on specific time
- *  
+ * In the main you can enter the condition for filtering the list
  * @author Bar, Noy, Doriya
  *
  */
@@ -15,7 +15,7 @@ public class ParsingFiles extends ReadFiles{
 	public static  List<LineFile> parse_File(List<String[]> file){
 		List<LineFile> line = new ArrayList<LineFile>();
 		String [] id = file.get(0);
-		Model ID = new Model(id[2]);
+		Model ID = new Model(id[2].replace("model=", ""));
 		int countNet =0;
 		for (int i = 2; i < file.size(); i+=countNet) {
 			String[]s = file.get(i);
@@ -45,7 +45,7 @@ public class ParsingFiles extends ReadFiles{
 		}
 		return line;
 	}
-	
+
 	public static List<LineFile> merge_File(String[] files){
 		List<LineFile> mergeFile = new ArrayList<LineFile>();
 		List<LineFile> file = new ArrayList<LineFile>();
@@ -54,16 +54,22 @@ public class ParsingFiles extends ReadFiles{
 			mergeFile.addAll(file);
 		}
 		return mergeFile;
-		
+
 	}
 
 	public static void main(String[] args) {
-		Folder f  = new Folder("C:/Users/a/workspace/ObjectOriented") ;
-		String []s = f.csv_Files("C:/Users/a/workspace/ObjectOriented");
+		Folder f  = new Folder("C:\\Users\\a\\git\\OO_Project\\ObjectOriented") ;
+		String []s = f.csv_Files("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
+		System.out.println(s);
 		List<LineFile> fin = new ArrayList<LineFile>();
 		fin = merge_File(s);
 		WriteCsv.writeFile(fin, "fin.csv");
-		
+		String m="SM-G950F";
+		filter c2 = list->list.getModel().equals(m);
+		filter c1 = list->list.getLocation().getPoints().getAlt()>=650;
+		List<LineFile> filteredStrings = FileFilter.filter(fin,c2);
+		WriteCsv.writeFile(filteredStrings,"filterList.csv");
+
 	}
-	
+
 }
