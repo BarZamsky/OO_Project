@@ -90,6 +90,6 @@ public class Time {
 
 	@Override
 	public String toString() {
-		return year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+		return year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second+"Z";
 	}		
 }
