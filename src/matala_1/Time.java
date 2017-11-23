@@ -1,7 +1,7 @@
 package matala_1;
 /**
- * This
- * @author a
+ * This class represent a Time object of the wifi scan
+ * @author Bar,Noy,Doriya
  *
  */
 public class Time {
@@ -11,9 +11,9 @@ public class Time {
 	private int hour;
 	private int minute;
 	private int second;
-	
+
 	public Time(){}
-	
+
 	public Time(String year, String month, String day, int hour, int minute, int second) {
 		this.year = year;
 		this.month = month;
@@ -22,7 +22,11 @@ public class Time {
 		this.minute = minute;
 		this.second = second;
 	}
-	
+	/**
+	 * This function take a String from the csv file the addapt it to the Time object
+	 * @param time String time
+	 * @return new Time object
+	 */
 	public Time set_Date(String time){
 		Time _time = new Time();
 		String[]times =time.split(" ");
@@ -35,6 +39,17 @@ public class Time {
 		_time.setMinute(Integer.parseInt(t[1]));
 		_time.setSecond(Integer.parseInt(t[2]));
 		return _time;
+	}
+	/**
+	 * This function checks if two given times are equals
+	 * @param t Time object
+	 * @return true if equals
+	 */
+	public boolean is_Equal(Time t){
+		if(this.day.equals(t.day)&&this.month.equals(t.month)&&this.year.equals(t.year)&&this.minute==t.minute&&this.second==t.second&&this.hour==t.hour){
+			return true;
+		}
+		return false;
 	}
 	public String getYear() {
 		return year;
@@ -72,24 +87,9 @@ public class Time {
 	public void setSecond(int second) {
 		this.second = second;
 	}
-	
-	public boolean is_Equal(Time t){
-		if(this.day.equals(t.day)&&this.month.equals(t.month)&&this.year.equals(t.year)&&this.minute==t.minute&&this.second==t.second&&this.hour==t.hour){
-		return true;
-		}
-		return false;
-	}
+
 	@Override
 	public String toString() {
 		return year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
-	}
-	
-	public static void main(String[] args) {
-		String s = "2017-10-18 16:20:38";
-		Time t = new Time();
-		t=t.set_Date(s);
-		System.out.println(t);
-	}
-	
-	
+	}		
 }
