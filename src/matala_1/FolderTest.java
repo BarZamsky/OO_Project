@@ -2,8 +2,6 @@ package matala_1;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 public class FolderTest {

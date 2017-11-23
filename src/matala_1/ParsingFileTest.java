@@ -15,7 +15,7 @@ public class ParsingFileTest {
 	public void parse_fileTest() {
 
 		String[] files = Folder.csv_Files("C:/Users/Doriya Spielman/workspace/ObjectOriented");
-		ArrayList<String[]> output = ReadFiles.readFile(files[0]);
+		List<String[]> output = ReadFiles.readFile(files[0]);
 		List<LineFile> l=ParsingFiles.parse_File(output);
 		assertEquals("Size of the list should be 0",149, l.size());	
 	}
@@ -37,7 +37,7 @@ public class ParsingFileTest {
 	public void marge_fileTest() {
 
 		String[] files = Folder.csv_Files("C:/Users/Doriya Spielman/workspace/ObjectOriented");
-		List<LineFile> l=ParsingFiles.merge_Files(files);
+		List<LineFile> l=ParsingFiles.merge_File(files);
 		assertEquals("Size of the list should be 465",465, l.size());	
 	}
 	
