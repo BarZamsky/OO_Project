@@ -8,9 +8,14 @@ import java.io.File;
  */
 public class Folder extends File {
 
+private static final long serialVersionUID = 1L;
+
 	public Folder(String Path) {
 		super(Path);
 	}
+
+
+
 /**
  * This functions checks if the folder exist
  * @param path the folder location
@@ -29,7 +34,7 @@ public class Folder extends File {
 	 * @param path location of the folder
 	 * @return array of CSV files in the folder
 	 */
-	public  String[] csv_Files(String path){
+	public static String[] csv_Files(String path){
 		File file = new File(path);
 		int counter=0,index=0;
 		String[] files = file.list();
