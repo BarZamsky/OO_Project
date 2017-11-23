@@ -6,7 +6,7 @@ import matala_1.WriteCsv;
 
 /**
  * This class creates a new parse CSV file base on wifiNetworks that was captured on specific time
- * In the main you can enter the condition for filtering the list
+ * In the main you can enter the condition for filtering the list as you like
  * @author Bar, Noy, Doriya
  *
  */
