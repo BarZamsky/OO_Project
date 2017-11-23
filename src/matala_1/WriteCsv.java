@@ -4,7 +4,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * This class write the LineFile list to a new csv file
+ * @author Bar, Noy, Doriya
+ *
+ */
 public class WriteCsv {
 
 	public static void writeFile(List<LineFile> line, String output) {
@@ -21,11 +25,7 @@ public class WriteCsv {
 			}
 			bw.write("\n");
 			for(LineFile l : line){
-				bw.write(l.getTime().toString()+",");
-				bw.write(l.getModel().toString()+",");
-				bw.write(l.getLocation().toString()+",");
-				bw.write(l.getNumOfNetworks()+",");
-				bw.write(l.getNetwork().toString()+",");
+				bw.write(l.toString().replace("[", "").replace("]", ""));
 				bw.write("\n");
 			}
 			bw.close();
