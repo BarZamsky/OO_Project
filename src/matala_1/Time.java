@@ -23,7 +23,7 @@ public class Time {
 		this.second = second;
 	}
 	/**
-	 * This function take a String from the csv file the addapt it to the Time object
+	 * This function take a String from the csv file the adapt it to the Time object
 	 * @param time String time
 	 * @return new Time object
 	 */

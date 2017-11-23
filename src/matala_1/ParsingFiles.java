@@ -2,7 +2,6 @@ package matala_1;
 
 import java.util.ArrayList;
 import java.util.List;
-import matala_1.WriteCsv;
 
 /**
  * This class creates a new parse CSV file base on wifiNetworks that was captured on specific time
@@ -68,15 +67,16 @@ public class ParsingFiles extends ReadFiles{
 	}
 
 	public static void main(String[] args) {
-		//	Folder f  = new Folder("C:\\Users\\a\\git\\OO_Project\\ObjectOriented") ;
 		String []s = Folder.csv_Files("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
 		List<LineFile> fin = new ArrayList<LineFile>();
 		fin = merge_File(s);
-		WriteCsv.writeFile(fin, "fin.csv");
-		//filter c3 = list->list.getTime().getMinute()==22;
+		WriteCsv.writeFile(fin, "mergeFile.csv");
+		filter c3 = list->list.getTime().getMinute()>22;
 		//filter c2 = list->list.getModel().toString().equals("SM-G950F");
-		filter c1 = list->list.getLocation().getPoints().getAlt()>=400;
-		List<LineFile> filteredStrings = FileFilter.filter(fin,c1);
+		//filter c1 = list->list.getLocation().getPoints().getAlt()>=400;
+		List<LineFile> filteredStrings = FileFilter.filter(fin,c3);
 		WriteCsv.writeFile(filteredStrings,"filterList.csv");
+		
+						
 	}
 }

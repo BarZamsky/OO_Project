@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 /**
- * This class write the LineFile list to a new csv file
+ * This class write the LineFile list to a new CSV file
  * @author Bar, Noy, Doriya
  *
  */
