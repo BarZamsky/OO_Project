@@ -17,5 +17,5 @@ public class FileFilterTest {
 		List<LineFile> filterList = FileFilter.filter(l,f);
 		assertEquals("is the size after filtering ok?", 43, filterList.size());
 	}
-
+ 
 }
