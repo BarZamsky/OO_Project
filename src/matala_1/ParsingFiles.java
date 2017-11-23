@@ -11,7 +11,11 @@ import matala_1.WriteCsv;
  *
  */
 public class ParsingFiles extends ReadFiles{
-
+/**
+ * This function takes CSV file and arranged it to the wanted order
+ * @param file list of CSV file lines
+ * @return new List of type LineFile
+ */
 	public static  List<LineFile> parse_File(List<String[]> file){
 		List<LineFile> line = new ArrayList<LineFile>();
 		String [] id = file.get(0);
@@ -47,7 +51,11 @@ public class ParsingFiles extends ReadFiles{
 		}
 		return line;
 	}
-
+/**
+ * This function merge all the CSV files in the folder to one file
+ * @param files contains file's name
+ * @return List of the type LineFile
+ */
 	public static List<LineFile> merge_File(String[] files){
 		List<LineFile> mergeFile = new ArrayList<LineFile>();
 		List<LineFile> file = new ArrayList<LineFile>();
@@ -62,13 +70,12 @@ public class ParsingFiles extends ReadFiles{
 	public static void main(String[] args) {
 		//	Folder f  = new Folder("C:\\Users\\a\\git\\OO_Project\\ObjectOriented") ;
 		String []s = Folder.csv_Files("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
-		System.out.println(s);
 		List<LineFile> fin = new ArrayList<LineFile>();
 		fin = merge_File(s);
 		WriteCsv.writeFile(fin, "fin.csv");
 		//filter c3 = list->list.getTime().getMinute()==22;
 		//filter c2 = list->list.getModel().toString().equals("SM-G950F");
-		filter c1 = list->list.getLocation().getPoints().getAlt()>=650;
+		filter c1 = list->list.getLocation().getPoints().getAlt()>=400;
 		List<LineFile> filteredStrings = FileFilter.filter(fin,c1);
 		WriteCsv.writeFile(filteredStrings,"filterList.csv");
 	}
