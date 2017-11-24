@@ -23,7 +23,7 @@ import de.micromata.opengis.kml.v_2_2_0.Feature;
  */
 public class Csv2Kml {
 /**
- * This function creates a KML file
+ * This function creates a KML file with TimeStamp
  * @param lines the LineFile List
  * @param output the name of the new KML file
  */
