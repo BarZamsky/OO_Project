@@ -7,7 +7,7 @@ package matala_1;
 public class Network implements Comparable<Network> {
 	public String SSID;
 	public String Mac;
-	public String Signal;
+	public int Signal;
 	public String Chanel;
 
 /**
@@ -17,7 +17,7 @@ public class Network implements Comparable<Network> {
  * @param signal 
  * @param chanel
  */
-	public Network(String sSID, String mac, String signal, String chanel) {
+	public Network(String sSID, String mac, int signal, String chanel) {
 		SSID = sSID;
 		Mac = mac;
 		Signal = signal;
@@ -36,10 +36,10 @@ public class Network implements Comparable<Network> {
 	public void setMac(String mac) {
 		Mac = mac;
 	}
-	public String getSignal() {
+	public int getSignal() {
 		return Signal;
 	}
-	public void setSignal(String signal) {
+	public void setSignal(int signal) {
 		Signal = signal;
 	}
 	public String getChanel() {
@@ -50,7 +50,7 @@ public class Network implements Comparable<Network> {
 	}
 	@Override
 	public int compareTo(Network o) {
-		return this.Signal.compareTo(o.Signal);
+		return Integer.compare(-this.Signal, -o.Signal);
 	}
 
 	@Override

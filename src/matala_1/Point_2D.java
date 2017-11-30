@@ -5,20 +5,17 @@ package matala_1;
  *
  */
 
-public class Point3d {
+public class Point_2D {
 	private double lon;
 	private double lat;
-	private double alt;
 
-	public Point3d(double lon, double lat, double alt){
-		this.alt = alt;
-		this.lon = lon;
+	public Point_2D(double lon, double lat){
 		this.lat = lat;
+		this.lon = lon;
 	}
 	
-	public double distanceTo(Point3d l1){
-return Math.sqrt( Math.pow(this.lon - l1.lon, 2) + Math.pow(this.lat - l1.lat, 2) + 
-					Math.pow(this.alt - l1.alt, 2));
+	public double distanceTo(Point_2D l1){
+		return Math.hypot( this.getLon() - l1.getLon() , this.getLat() - l1.getLat());
 	}
 	
 	public double getLon() {
@@ -36,16 +33,14 @@ return Math.sqrt( Math.pow(this.lon - l1.lon, 2) + Math.pow(this.lat - l1.lat, 2
 	public void setLat(double lat) {
 		this.lat = lat;
 	}
-
-	public double getAlt() {
-		return alt;
-	}
-
-	public void setAlt(double alt) {
-		this.alt = alt;
-	}
 	@Override
 	public String toString() {
-		return lat +","+lon+","+alt;
+		return lat +","+lon;
+	}
+	public static void main(String[] args) {
+		Point_2D p1= new Point_2D(32, 40);
+		Point_2D p2 = new Point_2D(13,10);
+		double a = p1.distanceTo(p2);
+		System.out.println(a);
 	}
 }

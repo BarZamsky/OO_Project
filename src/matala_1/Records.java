@@ -31,7 +31,7 @@ public class Records {
 		return _rec;
 	}
 
-	//filter file
+	//filter function
 	public Records filter(filter condition){
 		List<LineFile> output = new ArrayList<>();
 		for (LineFile lineFile : _rec) {
@@ -67,9 +67,10 @@ public class Records {
 		try{
 			File f = new File(path);
 			File[] files = f.listFiles();
-			List<LineFile> merge = new ArrayList<LineFile>();
+			
 			for (int i = 0; i < files.length; i++) {
-				if(files[i].getName().endsWith("csv")){
+				List<LineFile> merge = new ArrayList<LineFile>();
+				if(files[i].getName().endsWith("csv")&& (!files[i].isDirectory())){
 					List<String[]> file = readFile(files[i]);
 					String [] id = file.get(0);
 					String ID = id[2].replace("model=", "");
@@ -82,7 +83,7 @@ public class Records {
 						double lat = Double.parseDouble(s[6]);
 						double lon = Double.parseDouble(s[7]);
 						double alt = Double.parseDouble(s[8]);
-						Point3d p = new Point3d(lon, lat, alt);
+						Point_2D p = new Point_2D(lon, lat);
 						countNet =0;
 						for (int t = 2; t < file.size(); t++) {
 							String[] lines = file.get(t);
@@ -100,11 +101,10 @@ public class Records {
 						for (int c = 0; c <Wifi.size()&&c<10; c++){
 							Wifi2.add(Wifi.get(c));
 						}
-						merge.add(new LineFile(time,ID,p,countNet,Wifi2));
-						
+						merge.add(new LineFile(time,ID,p,alt,countNet,Wifi2));
 					}
-					this._rec.addAll(merge);
 				}
+				this._rec.addAll(merge);
 			}
 		}
 		catch(Exception ex) {
@@ -157,10 +157,10 @@ public class Records {
 				//.withStyleUrl("#style_" + ID)
 				.withDescription(
 						"Time: <b>"+ f.getTime().toString() +"</b><br/>ID: <b>"+ f.getModel().toString() +"</b><br/>SSID: <b>"+n.getSSID().toString() +"</b><br/>MAC: <b>"+ n.getMac().toString() +"</b><br/>Signal: <b>"+ n.getSignal() +"</b><br/>Frequency: <b>"+ n.getChanel().toString() +"</b>")
-				.createAndSetLookAt().withLongitude(f.getLocation().getLon()).withLatitude(f.getLocation().getLat()).withAltitude(f.getLocation().getAlt());
+				.createAndSetLookAt().withLongitude(f.getLocation().getLon()).withLatitude(f.getLocation().getLat()).withAltitude(f.getAlt());
 				doc.addToFeature(placemark);
 			}
-			placemark.createAndSetPoint().addToCoordinates(f.getLocation().getLon(),f.getLocation().getLat(),f.getLocation().getAlt());
+			placemark.createAndSetPoint().addToCoordinates(f.getLocation().getLon(),f.getLocation().getLat(),f.getAlt());
 		}
 		kml.setFeature(doc);
 		try {
@@ -169,24 +169,4 @@ public class Records {
 			e.printStackTrace();
 		}
 	}
-
-
-	@Override
-	public String toString() {
-		for( LineFile s : _rec){
-			System.out.println(s);
-		}
-		return "done";
-	}
-	public static void main(String[] args) {
-		Records r = new Records();
-		r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
-		System.out.println("done");
-		r.toCsv("try.csv");
-		filter c3 = list->list.getLocation().getAlt()>=400;;
-		r=r.filter(c3);
-		r.toCsv("filter.csv");
-		r.csv2Kml("trykml.kml");
-	}
-
 }
