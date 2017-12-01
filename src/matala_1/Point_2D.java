@@ -37,10 +37,4 @@ public class Point_2D {
 	public String toString() {
 		return lat +","+lon;
 	}
-	public static void main(String[] args) {
-		Point_2D p1= new Point_2D(32, 40);
-		Point_2D p2 = new Point_2D(13,10);
-		double a = p1.distanceTo(p2);
-		System.out.println(a);
-	}
 }
