@@ -16,7 +16,11 @@ import de.micromata.opengis.kml.v_2_2_0.Icon;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Style;
-
+/**
+ * This class represent a LineFile object and all the functions you can apply on it.
+ * @author Bar, Noy, Doriya
+ *
+ */
 public class Records {
 	private ArrayList<LineFile> _rec;
 
@@ -31,7 +35,11 @@ public class Records {
 		return _rec;
 	}
 
-	//filter function
+	/**
+	 * This function checks if the condition is true
+	 * @param condition Time,ID or Location inserted
+	 * @return new Record 
+	 */
 	public Records filter(filter condition){
 		List<LineFile> output = new ArrayList<>();
 		for (LineFile lineFile : _rec) {
@@ -42,6 +50,11 @@ public class Records {
 		return new Records(output);
 	}
 
+	/**
+	 * This function reads CSV file
+	 * @param files the CSV 
+	 * @return List of strings[]
+	 */
 	public static List<String[]> readFile(File files){
 		List<String[]> file = new ArrayList<String[]>();
 		try{
@@ -62,7 +75,10 @@ public class Records {
 		}
 		return file;
 	}
-
+/**
+ * This function changes the input CSV file according the new CSV file requires 
+ * @param path folder location
+ */
 	public void parseFile(String path){
 		try{
 			File f = new File(path);
@@ -112,7 +128,10 @@ public class Records {
 			System.exit(2);
 		}
 	}
-
+/**
+ * This function write the new Records to a CSV file
+ * @param output output file name
+ */
 	public void toCsv(String output){
 		try {
 
@@ -136,7 +155,10 @@ public class Records {
 			System.out.print("Error writing file\n" + ex);
 		}
 	}
-
+/**
+ * This function create a KML file from the Record
+ * @param output KML file name
+ */
 	public void csv2Kml(String output){
 		final Kml kml = new Kml();
 		Document doc = kml.createAndSetDocument().withName("Locations").withOpen(true);
