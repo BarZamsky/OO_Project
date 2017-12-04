@@ -54,30 +54,27 @@ public class Time {
 	} 
 	
 	public boolean time_Between(Time start , Time end){
-		if(start.getYear() <= end.getYear()){
-			if(start.getMonth() == end.getMonth()){
-				if(start.getDay() == end.getDay()){
-					if(start.getHour() == end.getHour()){
-						if(start.getMinute() == end.getMinute()){
-							return((this.second>=start.getSecond())&&(this.second<=end.getSecond()));	
+		if((start.getYear() <= this.getYear())&&(end.getYear()>=this.getYear())){
+			if((start.getMonth()<=this.getMonth())&&(end.getMonth()>=this.getMonth())){
+				if((start.getDay()<=this.getDay())&&(end.getDay()>=this.getDay())){
+					if((start.getHour()<=this.getHour())&& (end.getHour()>=this.getHour())){
+						if((start.getMinute()<=this.getMinute()) && (end.getMinute()>=this.getMinute())){
+							if((start.getSecond()<this.getSecond())&&(end.getSecond()>this.getSecond())){
+								return true;
+							}
+							return ((this.minute>=start.getMinute())&&(end.getMinute()>=this.minute));
 						}
-						return ((this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
-								&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+						//return ((this.minute>=start.getMinute())&&(end.getMinute()>=this.minute));
+					return false;
 					}
-					return ((this.hour>=start.getHour())&&(end.getHour()>=this.hour)
-							&&(this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
-							&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+					//return ((this.hour>=start.getHour())&&(end.getHour()>=this.hour));
+				return false;
 				}
-				return((this.day>=start.getDay())&&(end.getDay()>=this.day)
-						&&(this.hour>=start.getHour())&&(end.getHour()>=this.hour)
-						&&(this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
-						&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+				//return((this.day>=start.getDay())&&(end.getDay()>=this.day));
+			return false;
 			}
-			return((this.month>=start.getMonth())&&(end.getMonth()>=this.month)
-					&&(this.day>=start.getDay())&&(end.getDay()>=this.day)
-					&&(this.hour>=start.getHour())&&(end.getHour()>=this.hour)
-					&&(this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
-					&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+			//return((this.month>=start.getMonth())&&(end.getMonth()>=this.month));
+		return false;
 		}
 		return false;
 	}
@@ -125,9 +122,9 @@ public class Time {
 	}	
 
 	public static void main(String[] args) {
-		Time t1 = new Time(2017, 10, 27, 16, 18, 47);
-		Time t = new Time(2017, 10, 27, 16, 27, 42);
-		Time t2 = new Time(2017, 10, 27, 16, 18, 17);
+		Time t1 = new Time(2017, 10, 27, 16, 15, 52);
+		Time t = new Time(2017, 10, 27, 16, 39, 28);
+		Time t2 = new Time(2017, 10, 27, 16, 39, 59);
 		boolean b = t2.time_Between(t1, t);
 		System.out.println(b);
 	}
