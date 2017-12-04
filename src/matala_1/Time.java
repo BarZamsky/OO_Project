@@ -51,12 +51,35 @@ public class Time {
 			return true;
 		}
 		return false;
-	}
-
+	} 
+	
 	public boolean time_Between(Time start , Time end){
-		return(this.day>=start.getDay() && this.day<=end.getDay()) && (this.month>=start.getMonth() &&this.month<=end.getMonth())
-				&& (this.year>=start.getYear() && this.year<=end.getYear()) && (this.hour>=start.getHour() && this.hour<=end.getHour())
-				&&(this.second>=start.getSecond() && this.second<=end.getSecond())&&(this.minute>=start.getMinute()&&this.minute<=end.getMinute());
+		if(start.getYear() <= end.getYear()){
+			if(start.getMonth() == end.getMonth()){
+				if(start.getDay() == end.getDay()){
+					if(start.getHour() == end.getHour()){
+						if(start.getMinute() == end.getMinute()){
+							return((this.second>=start.getSecond())&&(this.second<=end.getSecond()));	
+						}
+						return ((this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
+								&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+					}
+					return ((this.hour>=start.getHour())&&(end.getHour()>=this.hour)
+							&&(this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
+							&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+				}
+				return((this.day>=start.getDay())&&(end.getDay()>=this.day)
+						&&(this.hour>=start.getHour())&&(end.getHour()>=this.hour)
+						&&(this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
+						&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+			}
+			return((this.month>=start.getMonth())&&(end.getMonth()>=this.month)
+					&&(this.day>=start.getDay())&&(end.getDay()>=this.day)
+					&&(this.hour>=start.getHour())&&(end.getHour()>=this.hour)
+					&&(this.minute>=start.getMinute())&&(end.getMinute()>=this.minute)
+					&&(this.second>=start.getSecond())&&(this.second<=end.getSecond()));
+		}
+		return false;
 	}
 
 	public int getYear() {
@@ -99,5 +122,13 @@ public class Time {
 	@Override
 	public String toString() {
 		return year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second+"Z";
-	}		
+	}	
+
+	public static void main(String[] args) {
+		Time t1 = new Time(2017, 10, 27, 16, 18, 47);
+		Time t = new Time(2017, 10, 27, 16, 27, 42);
+		Time t2 = new Time(2017, 10, 27, 16, 18, 17);
+		boolean b = t2.time_Between(t1, t);
+		System.out.println(b);
+	}
 }
