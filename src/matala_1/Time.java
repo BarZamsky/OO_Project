@@ -127,5 +127,6 @@ public class Time {
 		Time t2 = new Time(2017, 10, 27, 16, 39, 59);
 		boolean b = t2.time_Between(t1, t);
 		System.out.println(b);
+		System.out.println(t1.toString());
 	}
 }

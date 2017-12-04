@@ -12,7 +12,7 @@ public class RecordsTest {
 
 	@Test
 	public void test_ReadFile() {
-		File path = new File("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
+		File path = new File("C:/Users/Doriya Spielman/git/OO_Project");
 		File[] files = path.listFiles();
 		List<String[]> file = new ArrayList<String[]>();
 		for (int i = 0; i < files.length; i++) {
@@ -20,15 +20,28 @@ public class RecordsTest {
 				file = Records.readFile(files[i]);
 			}
 		}
-		assertEquals(295, file.size());
+		assertEquals(895, file.size());
 	}
 
 	@Test
 	public void test_ParseFile(){
 		Records r = new Records();
-		String path = "C:\\Users\\a\\git\\OO_Project\\ObjectOriented";
+		String path = "C:/Users/Doriya Spielman/git/OO_Project";
 		r.parseFile(path);
-		assertEquals("ONEPLUS A3003", r.get_rec().get(1).getModel());
-		assertEquals(32.16874461, r.get_rec().get(4).getLocation().getLat(),0);
+		assertEquals("Lenovo PB2-690Y", r.get_rec().get(1).getModel());
+		assertEquals(32.16767714, r.get_rec().get(2).getLocation().getLat(),0);
+		assertEquals(34.80912469, r.get_rec().get(5).getLocation().getLon(),0);
+		assertEquals(30, r.get_rec().get(0).getAlt(),0);
+
+
+	}
+	@Test
+	public void test_toCsv(){
+		Records r = new Records();
+		String path = "C:/Users/Doriya Spielman/git/OO_Project";
+		r.toCsv(path);
+		assertEquals(0, r.get_rec().size());
+
+		
 	}
 }
