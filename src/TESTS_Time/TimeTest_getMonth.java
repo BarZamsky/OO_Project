@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import matala_1.Time;
-
+/**
+ * Test for getMonth in Time
+ *
+ */
 public class TimeTest_getMonth {
 
 	@Test

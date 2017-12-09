@@ -3,12 +3,14 @@ package TESTS_Time;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import matala_1.Time;
-
+/**
+ * test the function is_Equal (if it's False)
+ *
+ */
 public class TimeTest_is_Equal_F {
 
 	@Test
 	public void test() {
-		//test the function is_Equal (if False)
 		
 		int year = 1993;
 		int month = 07;

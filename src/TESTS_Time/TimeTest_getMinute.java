@@ -3,7 +3,10 @@ package TESTS_Time;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import matala_1.Time;
-
+/**
+ * Test for getMinute in Time
+ *
+ */
 public class TimeTest_getMinute {
 
 	@Test
