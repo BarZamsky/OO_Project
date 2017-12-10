@@ -2,7 +2,7 @@ package matala_1;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class Test_Point_2D {
+public class Point_2D_Test {
 
 	/**
 	 * Test for the function Distance in Point_2D
