@@ -1,4 +1,4 @@
-package matala_1;
+package Tests;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import matala_1.LineFile;
+import matala_1.Network;
+import matala_1.Point_2D;
+import matala_1.Time;
 
 public class LineFileTest {
 	

@@ -1,6 +1,8 @@
-package matala_1;
+package Tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import matala_1.Point_2D;
 
 public class Point_2D_Test {
 

@@ -1,4 +1,4 @@
-package matala_1;
+package Tests;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import matala_1.Records;
 
 public class Records_Test {
 	Records r = new Records();
