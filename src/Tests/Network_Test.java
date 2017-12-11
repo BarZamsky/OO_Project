@@ -1,6 +1,8 @@
-package matala_1;
+package Tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import matala_1.Network;
 
 public class Network_Test {
 	String ssid = "samsungs8";
