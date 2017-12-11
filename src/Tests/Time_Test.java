@@ -1,7 +1,6 @@
 package Tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 import matala_1.Time;
 
 public class Time_Test {
@@ -14,10 +13,6 @@ public class Time_Test {
 	Time t1 = new Time(year, month, day, hour, minute, second);
 	Time t2 = new Time(1993, 07, 13, 10, 14, 15);
 	Time t3 = new Time(2017, 11, 13 , 10, 10, 15);
-	String _time = "2017-12-10 10:11:15";
-	Time t5 = new Time();
-	
-	//t5 = t5.set_Date(t4);
 	Time time2 = new Time(2017, 10, 13, 11, 15, 20);
 	Time start = new Time(2017, 10, 13, 11, 10, 13);
 	Time end = new Time(2017, 10, 13, 11, 14, 16);
@@ -85,6 +80,9 @@ public class Time_Test {
 	 */
 	@Test
 	public void test_set_Data_Dat() {
+		String t4 = "2017-12-10 10:11:15";
+		Time t5 = new Time();
+		t5 = t5.set_Date(t4);
 		assertEquals(10, t5.getDay());
 	}
 	/**
@@ -92,6 +90,9 @@ public class Time_Test {
 	 */
 	@Test
 	public void test_set_Dta_Hour() {
+		String t4 = "2017-12-10 10:11:15";
+		Time t5 = new Time();
+		t5 = t5.set_Date(t4);
 		assertEquals(10, t5.getHour());
 	}
 	/**
@@ -99,6 +100,9 @@ public class Time_Test {
 	 */
 	@Test
 	public void test_set_Data_Minute() {
+		String t4 = "2017-12-10 10:11:15";
+		Time t5 = new Time();
+		t5 = t5.set_Date(t4);
 		assertEquals(11, t5.getMinute());
 	}
 	/**
@@ -106,6 +110,9 @@ public class Time_Test {
 	 */
 	@Test
 	public void test_set_Data_Month() {
+		String t4 = "2017-12-10 10:11:15";
+		Time t5 = new Time();
+		t5 = t5.set_Date(t4);
 		assertEquals(12, t5.getMonth());
 	}
 	/**
@@ -113,6 +120,9 @@ public class Time_Test {
 	 */
 	@Test
 	public void test_set_Data_Second() {
+		String t4 = "2017-12-10 10:11:15";
+		Time t5 = new Time();
+		t5 = t5.set_Date(t4);
 		assertEquals(15, t5.getSecond());
 	}
 	/**
@@ -120,6 +130,9 @@ public class Time_Test {
 	 */
 	@Test
 	public void test_set_Data_Year() {
+		String t4 = "2017-12-10 10:11:15";
+		Time t5 = new Time();
+		t5 = t5.set_Date(t4);
 		assertEquals(2017, t5.getYear());
 	}
 	/**
