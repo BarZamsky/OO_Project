@@ -19,7 +19,7 @@ public class Algo1_Line_Test {
 		assertEquals("-90", a.getSignal());
 	}
 	/**
-	 * Test for getAlt in Algo1_line
+	 * Test for getAlt in Algo1_line 
 	 */
 	@Test
 	public void test_getAlt() {
