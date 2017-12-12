@@ -13,15 +13,16 @@ public class Algo2_line implements Comparable<Algo2_line>{
 	private double _alt;
 	private Point_2D location;
 	
-	public Algo2_line(int input_signal, int list_signal,double _alt,Point_2D location){
+	public Algo2_line(int input_signal, int list_signal){
 		this._signal=list_signal;
-		if(list_signal==NO_SIGNAL){
-			this._diff = DIFF_NO_SIG;
+		if(_signal<=NO_SIGNAL){
+			_diff = DIFF_NO_SIG;
 		}
 		else{
-			this._diff = Math.abs(input_signal-list_signal);
+			int dif = Math.abs(input_signal-list_signal);
+			_diff = Math.max(dif, MIN_DIFF);
 		}
-		_weight = NORM / Math.pow(_diff, SIG_DIFF)*Math.pow(input_signal, POWER);
+		_weight = NORM / (Math.pow(_diff, SIG_DIFF)*Math.pow(input_signal, POWER));
 	}
 
 	public double get_alt() {

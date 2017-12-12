@@ -77,7 +77,7 @@ public class Algo_1{
 	
 	public static void main(String[] args) {
 		Records r = new Records();
-		r.parseFile("C:\\Users\\Doriya Spielman\\git\\OO_Project");
+		r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
 		r.toCsv("Merge_File.csv");
 		Algo_1 a = new Algo_1(r);
 		a.locate_Mac(r, "0a:8d:db:6e:71:6d");
