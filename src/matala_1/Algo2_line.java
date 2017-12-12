@@ -1,5 +1,9 @@
 package matala_1;
-
+/**
+ * This class represets an object of algo2 line
+ * @author Bar, Noy, Doriya
+ *
+ */
 public class Algo2_line implements Comparable<Algo2_line>{
 	final int POWER = 2;
 	final int NORM = 10000;

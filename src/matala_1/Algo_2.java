@@ -2,7 +2,11 @@ package matala_1;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class represents the main class for algo2
+ * @author Bar, Noy, Doriya
+ *
+ */
 public class Algo_2 {
 	final int NO_SIGNAL = -120;
 	private Algo2_line _mac1,_mac2,_mac3;
@@ -23,7 +27,16 @@ public class Algo_2 {
 		_wLon = linefile.getLocation().getLon()*_pi;
 		_wAlt = linefile.getAlt()*_pi;
 	}
-
+/**
+ * This functions receives 3 MAC address and 3 signals and apply on them the Algo2
+ * @param _rec Record of wifi lines
+ * @param mac1
+ * @param signal1
+ * @param mac2
+ * @param signal2
+ * @param mac3
+ * @param signal3
+ */
 	public void find_Mac(Records _rec, String mac1,int signal1,String mac2,int signal2, String mac3,int signal3){
 		List<LineFile> _line = _rec.get_rec();
 		List<Algo2_line> algo1 = new ArrayList<Algo2_line>();
@@ -64,6 +77,9 @@ public class Algo_2 {
 			}	
 		}
 }
+	/**
+	 * This function calculates the w-sum of those 3 MAC address
+	 */
 	public void calc_Weight(){
 		double sum_wAlt=0,sum_wLon=0,sum_wLat=0,sum_Weight=0;
 		for (int i=0;i<3; i++){
@@ -82,6 +98,7 @@ public class Algo_2 {
 	public double getAlt(){
 		return w_alt;
 	}
+	
 public static void main(String[] args) {
 	Records r = new Records();
 	r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
