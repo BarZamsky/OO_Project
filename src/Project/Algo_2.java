@@ -27,56 +27,55 @@ public class Algo_2 {
 		_wLon = linefile.getLocation().getLon()*_pi;
 		_wAlt = linefile.getAlt()*_pi;
 	}
-/**
- * This functions receives 3 MAC address and 3 signals and apply on them the Algo2
- * @param _rec Record of wifi lines
- * @param mac1
- * @param signal1
- * @param mac2
- * @param signal2
- * @param mac3
- * @param signal3
- */
+	/**
+	 * This functions receives 3 MAC address and 3 signals and apply on them the Algo2
+	 * @param _rec Record of wifi lines
+	 * @param mac1
+	 * @param signal1
+	 * @param mac2
+	 * @param signal2
+	 * @param mac3
+	 * @param signal3
+	 */
 	public void find_Mac(Records _rec, String mac1,int signal1,String mac2,int signal2, String mac3,int signal3){
 		List<LineFile> _line = _rec.get_rec();
 		List<Algo2_line> algo1 = new ArrayList<Algo2_line>();
 		List<Algo2_line> algo2 = new ArrayList<Algo2_line>();
 		List<Algo2_line> algo3 = new ArrayList<Algo2_line>();
 		comb = new ArrayList<Algo_2>();
-		
+
 		for(LineFile line : _line){ 
 			List<Network> _wifi = line.getNetwork();
 			for(Network wifi : _wifi){
-				Algo2_line a,b,c;
 				if(wifi.getMac().equals(mac1)){
-					 a = new Algo2_line(signal1, wifi.getSignal());
-					algo1.add(a);
+					_mac1 = new Algo2_line(signal1, wifi.getSignal());
+					algo1.add(_mac1);
 				}
 				else{
-					a =new Algo2_line(signal1,NO_SIGNAL);
-					algo1.add(a);
+					_mac1 =new Algo2_line(signal1,NO_SIGNAL);
+					algo1.add(_mac1);
 				}
 				if(wifi.getMac().equals(mac2)){
-					b = new Algo2_line(signal2, wifi.getSignal());
-					algo2.add(b);
+					_mac2 = new Algo2_line(signal2, wifi.getSignal());
+					algo2.add(_mac2);
 				}
 				else{
-					b =new Algo2_line(signal2,NO_SIGNAL);
-					algo2.add(b);
+					_mac2 =new Algo2_line(signal2,NO_SIGNAL);
+					algo2.add(_mac2);
 				}
 				if(wifi.getMac().equals(mac3)){
-					c =new Algo2_line(signal3, wifi.getSignal());
-					algo3.add(c);
+					_mac3 =new Algo2_line(signal3, wifi.getSignal());
+					algo3.add(_mac3);
 				}
 				else{
-					c =new Algo2_line(signal3,NO_SIGNAL);
-					algo3.add(c);
+					_mac3 =new Algo2_line(signal3,NO_SIGNAL);
+					algo3.add(_mac3);
 				}
 				algo1.sort(null);algo2.sort(null);algo3.sort(null);
-				comb.add(new Algo_2(line, a, b, c));
+				comb.add(new Algo_2(line, _mac1, _mac2, _mac3));
 			}	
 		}
-}
+	}
 	/**
 	 * This function calculates the w-sum of those 3 MAC address
 	 */
@@ -98,15 +97,15 @@ public class Algo_2 {
 	public double getAlt(){
 		return w_alt;
 	}
-	
-public static void main(String[] args) {
-	Records r = new Records();
-	r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
-	r.toCsv("Merge_File.csv");
-	Algo_2 a = new Algo_2(r);
-	a.find_Mac(r, "c4:12:f5:fd:d1:94", -50, "e8:fc:af:9d:69:be", -80, "7c:b7:33:2e:76:73", -30);
-	a.calc_Weight();
-	System.out.println(a.getLocation().toString()+","+a.getAlt());
-	
-}
+
+	public static void main(String[] args) {
+		Records r = new Records();
+		r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
+		r.toCsv("Merge_File.csv");
+		Algo_2 a = new Algo_2(r);
+		a.find_Mac(r, "c4:12:f5:fd:d1:94", -50, "e8:fc:af:9d:69:be", -80, "7c:b7:33:2e:76:73", -30);
+		a.calc_Weight();
+		System.out.println(a.getLocation().toString()+","+a.getAlt());
+
+	}
 }

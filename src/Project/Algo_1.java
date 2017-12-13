@@ -1,6 +1,9 @@
 package Project;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import java.util.List;
  *
  */
 public class Algo_1{
+	private List<LineFile> _file;
 	private List<Algo1_linefile> _fileList;
 	final int max_Signals = 4 ;
 	private ArrayList<Double> _wLat;
@@ -19,19 +23,16 @@ public class Algo_1{
 	private ArrayList<Double> _wWeigth;
 	private double wLon,wLat,wAlt;
 
-	public Algo_1(Records _rec){
-		_rec = new Records();
+	public Algo_1(){
+		_file = new ArrayList<LineFile>();
 	}
 	/**
 	 * This functions search for the MAC in the Records list, takes 4 MAC with strongest signal 
 	 * and calculate the wLat,wLon,wAlt according to the demands
-	 * @param rec Record<LineFile> list
-	 * @param mac String MAC address
 	 */
-	public void locate_Mac(Records rec){
-		List<LineFile> _line = rec.get_rec();// כל הרשימה
+	public void locate_Mac(){
 		_fileList = new ArrayList<Algo1_linefile>();
-		for(LineFile l : _line){
+		for(LineFile l : _file){
 			List<Algo1_line> line = new ArrayList<Algo1_line>();
 			
 			_wLat = new ArrayList<Double>();
@@ -44,7 +45,7 @@ public class Algo_1{
 				if(n.isTaken()==false){
 				String mac = n.getMac();
 					net.add(n);
-					line = search(mac, rec);
+					line = search(mac, _file);
 				
 			line.sort(null);
 			for(int i=0;i<max_Signals && i<line.size();i++){
@@ -67,11 +68,15 @@ public class Algo_1{
 			System.out.println(a.toString());
 		}
 	}
-
-	public List<Algo1_line> search(String mac, Records r){
-		List<Algo1_line> line = new ArrayList<Algo1_line>();
-		List<LineFile> _line = r.get_rec();
-		for(LineFile _list : _line){
+/**
+ * This function search in the list for same mac address as given 
+ * @param mac the mac to search in the list
+ * @param _file LineFile list
+ * @return new Algo1_line list
+ */
+	public List<Algo1_line> search(String mac, List<LineFile> _file){
+		List<Algo1_line> line = new ArrayList<Algo1_line>();;
+		for(LineFile _list : _file){
 			List<Network> net = _list.getNetwork();
 			for(Network n: net){
 				if (n.getMac().equals(mac)){
@@ -97,6 +102,10 @@ public class Algo_1{
 		wLat=sumLat/sumW;
 		wAlt=sumAlt/sumW;
 	}
+	/**
+	 * This function write the new csv file
+	 * @param output output csv file name
+	 */
 	public void toCsv2(String output){
 		try{
 			FileWriter fw = new FileWriter(output);
@@ -111,12 +120,39 @@ public class Algo_1{
 			System.out.print("Error writing file\n" + ex);
 		}
 	}
+	/**
+	 * This function reads the merged csv input
+	 * @param fileName merged file name
+	 */
+	public void readFile(String fileName){
+		List<LineFile> files = new ArrayList<LineFile>();
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			String line="";
+			br.readLine();
+			while ((line = br.readLine()) != null) {
+				String[] str = line.split(",");
+				List<Network> net = new ArrayList<Network>();
+				Point_2D point = new Point_2D(Double.parseDouble(str[2]),Double.parseDouble(str[3]));
+				Time time = new Time();
+				time = time.set_Date2(str[0]);
+				for(int i=6;i<str.length;i+=4){
+					Network n = new Network(str[i], str[i+1], Integer.parseInt(str[i+2]), str[i+3]);
+					net.add(n);
+				}
+				files.add(new LineFile(time,str[1],point,Double.parseDouble(str[4]),Integer.parseInt(str[5]), net));
+			}
+			br.close();
+		}
+		catch(IOException ex) {
+			System.out.print("Error reading file\n" + ex);
+			System.exit(2);
+		}
+	}
 	public static void main(String[] args) {
-		Records r = new Records();
-		r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
-		r.toCsv("Merge_File.csv");
-		Algo_1 a = new Algo_1(r);
-		a.locate_Mac(r);
+		Algo_1 a = new Algo_1();
+		a.readFile("Merge_File.csv");
+		a.locate_Mac();
 		a.toCsv2("algo1.csv");
 	}
 }

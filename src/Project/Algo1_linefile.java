@@ -1,5 +1,9 @@
 package Project;
-
+/**
+ * This class creates linefile for Algo1 
+ * @author Bar, Noy ,Doriya
+ *
+ */
 public class Algo1_linefile {
 private Time _time;
 private Point_2D _location;

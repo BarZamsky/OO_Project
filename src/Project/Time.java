@@ -41,6 +41,26 @@ public class Time {
 		return _time;
 	}
 	/**
+	 * This function take a String from the csv file and adapt it to the Time object
+	 * for Algo1
+	 * @param time String time
+	 * @return new Time object
+	 */
+	public Time set_Date2(String time){
+		Time _time = new Time();
+		String[]times =time.split("T");
+		String[]date = times[0].split("-");
+		String[]t = times[1].split(":");
+		_time.setYear(Integer.parseInt(date[0]));
+		_time.setMonth(Integer.parseInt(date[1]));
+		_time.setDay(Integer.parseInt(date[2]));
+		_time.setHour(Integer.parseInt(t[0]));
+		_time.setMinute(Integer.parseInt(t[1]));
+		String s=t[2].replace("Z","");
+		_time.setSecond(Integer.parseInt(s));
+		return _time;
+	}
+	/**
 	 * This function checks if two given times are equals
 	 * @param t Time object
 	 * @return true if equals
@@ -52,7 +72,12 @@ public class Time {
 		}
 		return false;
 	} 
-	
+	/**
+	 * This function check if a certain time is between start time and end time
+	 * @param start - the starting time
+	 * @param end - the final time
+	 * @return true if is in the time range
+	 */
 	public boolean time_Between(Time start , Time end){
 		if((start.getYear() <= this.getYear())&&(end.getYear()>=this.getYear())){
 			if((start.getMonth()<=this.getMonth())&&(end.getMonth()>=this.getMonth())){
@@ -64,16 +89,12 @@ public class Time {
 							}
 							return ((this.minute>=start.getMinute())&&(end.getMinute()>=this.minute));
 						}
-						//return ((this.minute>=start.getMinute())&&(end.getMinute()>=this.minute));
 					return false;
 					}
-					//return ((this.hour>=start.getHour())&&(end.getHour()>=this.hour));
 				return false;
 				}
-				//return((this.day>=start.getDay())&&(end.getDay()>=this.day));
 			return false;
 			}
-			//return((this.month>=start.getMonth())&&(end.getMonth()>=this.month));
 		return false;
 		}
 		return false;
@@ -120,13 +141,4 @@ public class Time {
 	public String toString() {
 		return year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second+"Z";
 	}	
-
-	public static void main(String[] args) {
-		Time t1 = new Time(2017, 10, 27, 16, 15, 52);
-		Time t = new Time(2017, 10, 27, 16, 39, 28);
-		Time t2 = new Time(2017, 10, 27, 16, 39, 59);
-		boolean b = t2.time_Between(t1, t);
-		System.out.println(b);
-		System.out.println(t1.toString());
-	}
 }
