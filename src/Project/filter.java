@@ -1,4 +1,4 @@
-package matala_1;
+package Project;
 
 public interface filter {
 	boolean test(LineFile s1);

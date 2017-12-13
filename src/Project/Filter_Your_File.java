@@ -1,4 +1,4 @@
-package matala_1;
+package Project;
 import java.util.Scanner;
 /**
  * This class is the main class of our project. 

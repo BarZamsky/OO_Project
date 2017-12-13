@@ -1,4 +1,4 @@
-package matala_1;
+package Project;
 /**
  * This class represent a Time object of the wifi scan
  * @author Bar,Noy,Doriya

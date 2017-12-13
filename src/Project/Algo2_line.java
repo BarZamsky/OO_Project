@@ -1,4 +1,4 @@
-package matala_1;
+package Project;
 /**
  * This class represets an object of algo2 line
  * @author Bar, Noy, Doriya

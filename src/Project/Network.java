@@ -1,4 +1,4 @@
-package matala_1;
+package Project;
 /**
  * This class defines for every WIFI network that was scanned by the wigleWifi app it's 4 unique elements 
  * @author Bar, Noy, Doriya

@@ -4,10 +4,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
-import matala_1.LineFile;
-import matala_1.Network;
-import matala_1.Point_2D;
-import matala_1.Time;
+
+import Project.LineFile;
+import Project.Network;
+import Project.Point_2D;
+import Project.Time;
 
 public class LineFileTest {
 	Time t = new Time(1994, 02, 19, 10, 30, 30);

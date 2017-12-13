@@ -3,8 +3,9 @@ package Tests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import matala_1.Algo1_line;
-import matala_1.Point_2D;
+
+import Project.Algo1_line;
+import Project.Point_2D;
 
 public class Algo1_Line_Test {
 	

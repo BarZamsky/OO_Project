@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import matala_1.Records;
+import Project.Records;
 
 public class Records_Test {
 	Records r = new Records();

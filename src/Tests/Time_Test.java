@@ -1,7 +1,8 @@
 package Tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
-import matala_1.Time;
+
+import Project.Time;
 
 public class Time_Test {
 	int year = 1993;

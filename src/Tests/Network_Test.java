@@ -2,7 +2,7 @@ package Tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import matala_1.Network;
+import Project.Network;
 
 public class Network_Test {
 	String ssid = "samsungs8";
