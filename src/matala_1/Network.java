@@ -9,6 +9,7 @@ public class Network implements Comparable<Network> {
 	public String Mac;
 	public int Signal;
 	public String Chanel;
+	private boolean isTaken ;
 
 /**
  * 
@@ -22,7 +23,16 @@ public class Network implements Comparable<Network> {
 		Mac = mac;
 		Signal = signal;
 		Chanel = chanel;
+		isTaken=false;
 	}
+
+	public boolean isTaken(){
+		return isTaken;
+	}
+
+public void setTaken(boolean isTaken) {
+	this.isTaken = isTaken;
+}
 
 	public String getSSID() {
 		return SSID;

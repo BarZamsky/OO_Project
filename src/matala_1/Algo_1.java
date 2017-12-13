@@ -1,6 +1,7 @@
 package matala_1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 /**
  * This class represents functions to calculate w-center by MAC address
@@ -24,22 +25,26 @@ public class Algo_1{
 	 * @param rec Record<LineFile> list
 	 * @param mac String MAC address
 	 */
-	public void locate_Mac(Records rec, String mac){
-		_wLat = new ArrayList<Double>();
-		_wLon = new ArrayList<Double>();
-		_wAlt = new ArrayList<Double>();
-		_wWeigth = new ArrayList<Double>();
+	public void locate_Mac(Records rec){
 		List<LineFile> _line = rec.get_rec();// כל הרשימה
 		List<Algo1_line> line = new ArrayList<Algo1_line>();
+		List<Algo1_linefile> _fileList = new ArrayList<Algo1_linefile>();
+		
 		for(LineFile l : _line){
+			List<Network> net = new ArrayList<Network>();
+			_wLat = new ArrayList<Double>();
+			_wLon = new ArrayList<Double>();
+			_wAlt = new ArrayList<Double>();
+			_wWeigth = new ArrayList<Double>();
 			List<Network> wifi = l.getNetwork();
 			for(Network n : wifi){
-				if(n.getMac().equals(mac)){
-					line.add(new Algo1_line(n.getSignal(),l.getAlt(),l.getLocation()));			
+				String mac = n.getMac();
+				if(n.isTaken()==false){
+				line.add(new Algo1_line(n.getSignal(),l.getAlt(),l.getLocation()));	
+				net.add(n);
 				}
-			}
-		}
-
+				search(mac, rec);	
+			}	
 		line.sort(null);
 		for(int i=0;i<max_Signals;i++){
 			double lat = line.get(i).getLocation().getLat();
@@ -50,6 +55,24 @@ public class Algo_1{
 			_wLon.add(lon*weight);
 			_wAlt.add(alt*weight);
 			_wWeigth.add(weight);
+		}
+		calc_Wsum();
+		_fileList.add(new Algo1_linefile(l.getTime(), new Point_2D(wLon, wLat), wAlt, net.get(0)));
+		}
+		for(Algo1_linefile a: _fileList){
+			System.out.println(a.toString());
+		}
+		}
+	
+	public void search(String mac, Records r){
+		List<LineFile> _line = r.get_rec();
+		for(LineFile _list : _line){
+			List<Network> net = _list.getNetwork();
+			for(Network n: net){
+				if (n.getMac().equals(mac)){
+					n.setTaken(true);
+				}
+			}
 		}
 	}
 /**
@@ -80,9 +103,6 @@ public class Algo_1{
 		r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
 		r.toCsv("Merge_File.csv");
 		Algo_1 a = new Algo_1(r);
-		a.locate_Mac(r, "0a:8d:db:6e:71:6d");
-		a.calc_Wsum();
-		System.out.println(a.getLocation().toString());
-		System.out.println(a.getAlt());
+		a.locate_Mac(r);
 	}
 }
