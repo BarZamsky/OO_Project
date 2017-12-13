@@ -75,15 +75,15 @@ public class Records {
 		}
 		return file;
 	}
-/**
- * This function changes the input CSV file according the new CSV file requires 
- * @param path folder location
- */
+	/**
+	 * This function changes the input CSV file according the new CSV file requires 
+	 * @param path folder location
+	 */
 	public void parseFile(String path){
 		try{
 			File f = new File(path);
 			File[] files = f.listFiles();
-			
+
 			for (int i = 0; i < files.length; i++) {
 				List<LineFile> merge = new ArrayList<LineFile>();
 				if(files[i].getName().endsWith("csv")&& (!files[i].isDirectory())){
@@ -128,10 +128,10 @@ public class Records {
 			System.exit(2);
 		}
 	}
-/**
- * This function write the new Records to a CSV file
- * @param output output file name
- */
+	/**
+	 * This function write the new Records to a CSV file
+	 * @param output output file name
+	 */
 	public void toCsv(String output){
 		try {
 
@@ -155,10 +155,10 @@ public class Records {
 			System.out.print("Error writing file\n" + ex);
 		}
 	}
-/**
- * This function create a KML file from the Record
- * @param output KML file name
- */
+	/**
+	 * This function create a KML file from the Record
+	 * @param output KML file name
+	 */
 	public void csv2Kml(String output){
 		final Kml kml = new Kml();
 		Document doc = kml.createAndSetDocument().withName("Locations").withOpen(true);
