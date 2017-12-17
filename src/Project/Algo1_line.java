@@ -1,4 +1,5 @@
 package Project;
+
 /**
  * This class represents the objects of the new Line for Algo1
  * @author Doriya , Noy, Bar
