@@ -5,12 +5,12 @@ package Project;
  *
  */
 public class Algo2_line implements Comparable<Algo2_line>{
-	final int POWER = 2;
-	final int NORM = 10000;
-	final double SIG_DIFF =0.4;
-	final int MIN_DIFF =3;
-	final int NO_SIGNAL = -120;
-	final int DIFF_NO_SIG = 100;
+	static final int POWER = 2;
+	static final int NORM = 10000;
+	static final double SIG_DIFF =0.4;
+	static final int MIN_DIFF =3;
+	static final int NO_SIGNAL = -120;
+	static final int DIFF_NO_SIG = 100;
 
 	private double _weight; 
 	private int _signal,_diff;
