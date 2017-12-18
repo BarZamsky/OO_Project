@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Algo_1{
 	private List<LineFile> _file;
-	private List<Algo1_linefile> _fileList;
+	private List<Algo_linefile> _fileList;
 	final int max_Signals = 4 ;
 	private ArrayList<Double> _wLat;
 	private ArrayList<Double> _wLon;
@@ -30,7 +30,7 @@ public class Algo_1{
 	 * calculate the wLat,wLon,wAlt according to the demands
 	 */
 	public void locate_Mac(){
-		_fileList = new ArrayList<Algo1_linefile>();
+		_fileList = new ArrayList<Algo_linefile>();
 		for(LineFile l : _file){
 			List<Algo1_line> line = new ArrayList<Algo1_line>();
 			_wLat = new ArrayList<Double>();
@@ -58,7 +58,7 @@ public class Algo_1{
 					}
 
 					calc_Wsum();
-					_fileList.add(new Algo1_linefile(l.getTime(), new Point_2D(wLon, wLat), wAlt, net.get(0)));
+					_fileList.add(new Algo_linefile(l.getTime(), new Point_2D(wLon, wLat), wAlt, net.get(0)));
 				}
 			}
 		}
@@ -105,7 +105,7 @@ public class Algo_1{
 		try{
 			FileWriter fw = new FileWriter(output);
 			BufferedWriter bw = new BufferedWriter(fw);
-			for(Algo1_linefile l : _fileList){
+			for(Algo_linefile l : _fileList){
 				bw.write(l.toString().replace("[", "").replace("]", ""));
 				bw.write("\n");
 			}
