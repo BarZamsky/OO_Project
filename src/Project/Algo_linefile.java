@@ -4,13 +4,13 @@ package Project;
  * @author Bar, Noy ,Doriya
  *
  */
-public class Algo1_linefile {
+public class Algo_linefile {
 private Time _time;
 private Point_2D _location;
 private double _alt;
 private Network _wifi;
 
-public Algo1_linefile(Time _time, Point_2D _location, double _alt, Network _wifi) {
+public Algo_linefile(Time _time, Point_2D _location, double _alt, Network _wifi) {
 	this._time = _time;
 	this._location = _location;
 	this._alt = _alt;
