@@ -1,4 +1,7 @@
 package Project;
+
+import java.util.Arrays;
+
 /**
  * This class represent a Time object of the wifi scan
  * @author Bar,Noy,Doriya
@@ -29,15 +32,26 @@ public class Time {
 	 */
 	public Time set_Date(String time){
 		Time _time = new Time();
+		String[]date;
 		String[]times =time.split(" ");
-		String[]date = times[0].split("-");
+		if(times[0].contains("/")){
+		date = times[0].split("/");
+		}
+		else{
+			date = times[0].split("-");
+		}
 		String[]t = times[1].split(":");
 		_time.setYear(Integer.parseInt(date[0]));
 		_time.setMonth(Integer.parseInt(date[1]));
 		_time.setDay(Integer.parseInt(date[2]));
 		_time.setHour(Integer.parseInt(t[0]));
 		_time.setMinute(Integer.parseInt(t[1]));
-		_time.setSecond(Integer.parseInt(t[2]));
+		if(t.length==2){
+		_time.setSecond(00);
+		}
+		else{
+			_time.setSecond(Integer.parseInt(t[2]));
+		}
 		return _time;
 	}
 	/**

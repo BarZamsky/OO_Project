@@ -1,5 +1,8 @@
 package Project;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,20 +14,25 @@ public class Algo_2 {
 	private Algo2_line _mac1;
 	private Algo2_line _mac2;
 	private Algo2_line _mac3;
-	//private List<LineFile> _file;
+	private List<LineFile> _file;
 	private ArrayList<Algo2_line> algo2;
 	private double _pi;
 	private double _wLat,_wLon,_wAlt;
 	private double w_alt, w_lon, w_lat;
 
-	public Algo_2(Records Data, Records Input){
-		Data = new Records();
-		Input = new Records();
+//	public Algo_2(Records Data, Records Input){
+//		Data = new Records();
+//		Input = new Records();
+//	}
+	public Algo_2(List<List<comb>> a) { //we need to get n 
+for(int i=0;i<a.size();i++){
+	List<comb> cm = a.get(i);
+	for(comb b : cm){
+		_pi *= b.g;
 	}
-	public Algo_2(Algo2_line _mac1, Algo2_line _mac2, Algo2_line _mac3) { //we need to get n 
-		this._mac1 = _mac1;
-		this._mac2 = _mac2;
-		this._mac3 = _mac3;
+_wLat = data.getLocation().getLat()*_pi;
+_wLon = data.getLocation().getLon()*_pi;
+_wAlt = data.getAlt()*_pi;
 	}
 	/**
 	 * מקבלת INPUT, לוקחים כל שורה שם ומשווים לDATA
@@ -35,21 +43,16 @@ public class Algo_2 {
 	 * @param Data Record of wifi lines
 	 * @param Input Record of wifi lines without GPS
 	 */
-	public void find_Mac(Records Data, Records Input, int n){
-		List<LineFile> _line = Data.get_rec();
-		HashMap<String,List<Algo2_line>> hm=new HashMap<String,List<Algo2_line>>();  
+	public void find_Mac(List<LineFile> Data, List<LineFile> Input, int n){
+		HashMap<String,List<Algo_2>> hm=new HashMap<String,List<Algo_2>>();  
 
-		comb = new ArrayList<Algo_2>();
 		List<Algo2_line> Input_line = new ArrayList<Algo2_line>();
 		for (Algo2_line line : Input_line) {//for input
 			List<Network> wifiInput = line.getNetwork(); //לבדוק את  getNetwork
 			wifiInput.sort(null);
 
 			/* 		
-		_pi = _mac1.get_weight()*_mac2.get_weight()*_mac3.get_weight();
-		_wLat = linefile.getLocation().getLat()*_pi;
-		_wLon = linefile.getLocation().getLon()*_pi;
-		_wAlt = linefile.getAlt()*_pi;
+		
 			 */
 			for(LineFile Data_line : _line){ //for data
 				List<Network> _wifi = Data_line.getNetwork();
@@ -111,6 +114,32 @@ public class Algo_2 {
 			return w_alt;
 		}
 
+		public List<LineFile> readFile(String fileName){
+			List<LineFile> list = new ArrayList<LineFile>();
+			try{
+				BufferedReader br = new BufferedReader(new FileReader(fileName));
+				String line="";
+				while ((line = br.readLine()) != null) {
+					String[] str = line.split(",");
+					List<Network> net = new ArrayList<Network>();
+					Point_2D point = new Point_2D(Double.parseDouble(str[2]),Double.parseDouble(str[3]));
+					Time time = new Time();
+					time = time.set_Date2(str[0]);
+					for(int i=6;i<str.length;i+=4){
+						Network n = new Network(str[i], str[i+1], Integer.parseInt(str[i+2]), str[i+3]);
+						net.add(n);
+					}
+					net.sort(null);
+					list.add(new LineFile(time,str[1],point,Double.parseDouble(str[4]),Integer.parseInt(str[5]), net));
+				}
+				br.close();
+			}
+			catch(IOException ex) {
+				System.out.print("Error reading file\n" + ex);
+				System.exit(2);
+			}
+			return list;
+		}
 		public static void main(String[] args) {
 			Records r = new Records();
 			r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");

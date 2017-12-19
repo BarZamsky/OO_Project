@@ -1,25 +1,17 @@
 package Project;
-import java.util.ArrayList;
 
-
-public class comb {
+public class comb implements Comparable<comb>{
 	private double _pi;
 	private double _alt;
-	private Point_2D p;
-	private ArrayList<Algo2_line> diff_w;
+	private Point_2D _point;
     
-//    public comb(){
-//    	this._alt=_alt;
-//    	this.p=p;
-//    	this.diff_w=diff_w;
-//
-//    }
-    public comb(Point_2D p, double _alt, ArrayList<Algo2_line> diff_w,  double _pi){
-    	this.p=p;
-    	this.diff_w=diff_w;
-    	this._alt=_alt;
-    	this._pi=_pi;
-    }
+	public comb(){};
+	
+    public comb(Point_2D point, double alt,double pi){
+    	this._point=point;
+    	this._alt=alt;
+    	this._pi = pi;
+   }
 
 	public double get_pi() {
 		return _pi;
@@ -27,6 +19,14 @@ public class comb {
 
 	public void set_pi(double _pi) {
 		this._pi = _pi;
+	}
+
+	public void set_point(Point_2D _point) {
+		this._point = _point;
+	}
+
+	public Point_2D get_point() {
+		return _point;
 	}
 
 	public double get_alt() {
@@ -37,19 +37,14 @@ public class comb {
 		this._alt = _alt;
 	}
 
-	public Point_2D getP() {
-		return p;
+	@Override
+	public int compareTo(comb o) {
+		return Double.compare(-this._pi, -o._pi);
 	}
 
-	public void setP(Point_2D p) {
-		this.p = p;
+	@Override
+	public String toString() {
+		return "comb [_pi=" + _pi + ", _alt=" + _alt + ", _point=" + _point + "]";
 	}
-
-	public ArrayList<Algo2_line> getDiff_w() {
-		return diff_w;
-	}
-
-	public void setDiff_w(ArrayList<Algo2_line> diff_w) {
-		this.diff_w = diff_w;
-	}
+	
 }
