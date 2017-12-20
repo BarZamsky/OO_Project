@@ -1,7 +1,10 @@
 package Project;
 
+/**
+ * This class represents all the parameters for Algo1 and Algo2
+ */
 public class Parameters {
-	
+
 	static final int POWER = 2;
 	static final int NORM = 10000;
 	static final double SIG_DIFF = 0.4;

@@ -1,5 +1,10 @@
 package Project;
 
+/**
+* This class represents the an object of Location and PI for Algo2
+ * @author Noy, Bar, Doriya
+ *
+ */
 public class comb implements Comparable<comb>{
 	private double _pi;
 	private double _alt;
@@ -8,8 +13,8 @@ public class comb implements Comparable<comb>{
 	public comb(){};
 	
     public comb(Point_2D point, double alt,double pi){
-    	this._point=point;
-    	this._alt=alt;
+    	this._point = point;
+    	this._alt = alt;
     	this._pi = pi;
    }
 
@@ -46,5 +51,4 @@ public class comb implements Comparable<comb>{
 	public String toString() {
 		return "comb [_pi=" + _pi + ", _alt=" + _alt + ", _point=" + _point + "]";
 	}
-	
 }

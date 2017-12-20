@@ -1,7 +1,5 @@
 package Project;
 
-import java.util.Arrays;
-
 /**
  * This class represent a Time object of the wifi scan
  * @author Bar,Noy,Doriya

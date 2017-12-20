@@ -1,8 +1,7 @@
 package Project;
 
-
 /**
- * This class represets an object of algo2 line
+ * This class represents an object of algo2 line
  * @author Bar, Noy, Doriya
  *
  */

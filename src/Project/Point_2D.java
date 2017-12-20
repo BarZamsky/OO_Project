@@ -1,4 +1,5 @@
 package Project;
+
 /**
  * This class represent coordinate of alt,lon and alt
  * @author Bar, Noy, Doriya
