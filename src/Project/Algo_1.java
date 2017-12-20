@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * This class represents functions that read merge CSV file and calculate w-center for every mac address in it
- *@author Doriya , Noy, Bar
+ *@author Doriya, Noy, Bar
  */
 public class Algo_1{
 	private List<LineFile> _file;
@@ -85,7 +85,7 @@ public class Algo_1{
 	 */
 	public void calc_Wsum(){
 		double sumAlt=0,sumLon=0,sumLat=0,sumW=0;
-		for(int i=0;i<Parameters.max_Signals && i<_wAlt.size() && i<_wLon.size() && i<_wLat.size() && i< _wWeigth.size();i++){
+		for(int i=0; i<Parameters.max_Signals && i<_wAlt.size() && i<_wLon.size() && i<_wLat.size() && i< _wWeigth.size();i++){
 			sumAlt+=_wAlt.get(i);
 			sumLon+=_wLon.get(i);
 			sumLat+=_wLat.get(i);

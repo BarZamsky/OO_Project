@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * This class represents functions that read comb CSV and no GPS CSV,
- * calculate and return to the Input file the user location
+ * calculate Algo2 and return to the Input file the user location
  * @author Noy, Bar, Doriya
  *
  */
@@ -18,10 +18,11 @@ public class Algo_2 {
 	private List<comb> _comb; //combined list for the final calculates
 	private double _alt; 
 	private Point_2D _point;
-	private double w_alt=0, w_lon=0, w_lat=0;
+	private double w_alt = 0, w_lon = 0, w_lat = 0;
 	
 /**
-* This function go over the Input list and search every MAC address in the Data list 
+* This function go over the Input list and search every MAC address in the Data list
+* return the new location in the Input file
 */
 	public void combine(List<LineFile> input, List<LineFile> data){
 		for(LineFile line_input : input){
@@ -51,6 +52,7 @@ public class Algo_2 {
 //			for(List<Algo2_line> list : _list){
 //				System.out.println(list.toString());
 //			}
+			
 			for(List<Algo2_line> list : _list){
 				double pi = 1;
 				for(Algo2_line line : list){
@@ -72,6 +74,7 @@ public class Algo_2 {
 //			System.out.println(l.toString());
 //		}
 	}
+	
 	/**
 	 * this function calculate the wLat,wLon,wAlt according to the demands
 	 * and the final w_alt, w_lat, w_lon to create a new location
@@ -89,10 +92,11 @@ public class Algo_2 {
 		w_lon=sum_wLon/sum_Weight;
 		w_lat=sum_wLat/sum_Weight;
 	}
+	
 	/**
 	 * Reading from no GPS file.
 	 * @param fileName
-	 * @return
+	 * @return List
 	 */
 	public List<LineFile> readFile(String fileName){
 		List<LineFile> list = new ArrayList<LineFile>();
@@ -133,7 +137,7 @@ public class Algo_2 {
 	/**
 	 * Reading from comb file
 	 * @param fileName
-	 * @return
+	 * @return List
 	 */
 	public List<LineFile> readFile2(String fileName){
 		List<LineFile> list = new ArrayList<LineFile>();
