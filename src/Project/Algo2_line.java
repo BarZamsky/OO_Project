@@ -13,7 +13,7 @@ public class Algo2_line implements Comparable<Algo2_line>{
 	static final int NO_SIGNAL = -120;
 	static final int DIFF_NO_SIG = 100;
 	static final int max_Signals = 4;
-	
+
 	private double _weight; 
 	private int _signal,_diff;
 	private Point_2D _p;
@@ -32,10 +32,10 @@ public class Algo2_line implements Comparable<Algo2_line>{
 		_p = l.getLocation();
 		alt = l.getAlt();
 	}
-	
+
 	public Algo2_line(String string) {
-string=null;
-}
+		string=null;
+	}
 
 	public Point_2D get_p() {
 		return _p;
@@ -86,5 +86,5 @@ string=null;
 	public String toString() {
 		return "Algo2_line [_weight=" + _weight + ", _signal=" + _signal + ", _diff=" + _diff + "]";
 	}
-	
+
 }
