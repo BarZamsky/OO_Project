@@ -184,8 +184,8 @@ public class Algo_2 implements Functions{
 
 	public static void main(String[] args) {
 		Algo_2 a = new Algo_2();
-		a.readFile("_comb_no_gps_ts1.csv");
-		a.readFile2("comb_BM2.csv");
+		a.readFile("_comb_no_gps_ts2.csv");
+		a.readFile2("comb_BM3.csv");
 		a.search_Mac();
 		a.toCsv("complete_File.csv");
 	}
