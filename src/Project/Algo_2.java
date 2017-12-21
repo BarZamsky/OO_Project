@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,7 +29,6 @@ public class Algo_2 implements Functions{
 	 * return the new location in the Input file
 	 */
 	public void search_Mac(){
-		boolean exist=false;
 		for(LineFile line_input : _input){
 			_list = new ArrayList<List<Algo2_line>>();
 			_comb = new ArrayList<Algo2_calc>();
@@ -46,34 +44,9 @@ public class Algo_2 implements Functions{
 							l.add(al);
 						}
 						else{
-							for(LineFile line_data_Null : _data){ //for to check null
-								List<Network> _wifi_Null = line_data.getNetwork();
-
-								for(Network wifi_null : _wifi_Null){
-
-									while(line_data_Null!=null){
-										
-										if(wifi_null.getMac().equals(mac_input)){
-											exist=true;
-										}
-										else exist=false;
-									}
-									if(exist) {
-										Algo2_line al =new Algo2_line(line_data,net.getSignal(),NO_SIGNAL);
-										l.add(al);
-									}
-									else {
-										Algo2_line al =new Algo2_line("null");
-										l.add(al);
-									}
-
-									
-								}
-								
-							}
-							
+							Algo2_line al =new Algo2_line(line_data,net.getSignal(),NO_SIGNAL);
+							l.add(al);
 						}
-						
 					}
 				}
 				_list.add(l);
