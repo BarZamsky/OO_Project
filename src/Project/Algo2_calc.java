@@ -5,14 +5,14 @@ package Project;
  * @author Noy, Bar, Doriya
  *
  */
-public class comb implements Comparable<comb>{
+public class Algo2_calc implements Comparable<Algo2_calc>{
 	private double _pi;
 	private double _alt;
 	private Point_2D _point;
     
-	public comb(){};
+	public Algo2_calc(){};
 	
-    public comb(Point_2D point, double alt,double pi){
+    public Algo2_calc(Point_2D point, double alt,double pi){
     	this._point = point;
     	this._alt = alt;
     	this._pi = pi;
@@ -43,7 +43,7 @@ public class comb implements Comparable<comb>{
 	}
 
 	@Override
-	public int compareTo(comb o) {
+	public int compareTo(Algo2_calc o) {
 		return Double.compare(-this._pi, -o._pi);
 	}
 
