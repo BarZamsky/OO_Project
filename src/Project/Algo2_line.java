@@ -33,6 +33,10 @@ public class Algo2_line implements Comparable<Algo2_line>{
 		alt = l.getAlt();
 	}
 	
+	public Algo2_line(String string) {
+string=null;
+}
+
 	public Point_2D get_p() {
 		return _p;
 	}
