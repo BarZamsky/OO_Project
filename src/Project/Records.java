@@ -21,8 +21,9 @@ import de.micromata.opengis.kml.v_2_2_0.Style;
  * @author Bar, Noy, Doriya
  *
  */
-public class Records {
+public class Records implements Functions{
 	private ArrayList<LineFile> _rec;
+	private List<String[]> _file;
 
 	public Records(){
 		_rec=new ArrayList<LineFile>();
@@ -55,16 +56,17 @@ public class Records {
 	 * @param files the CSV 
 	 * @return List of strings[]
 	 */
-	public static List<String[]> readFile(File files){
-		List<String[]> file = new ArrayList<String[]>();
+	@Override
+	public void readFile(String fileName){
+		 _file = new ArrayList<String[]>();
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(files));
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
 			String line="";
-			file.add(br.readLine().split(","));
+			_file.add(br.readLine().split(","));
 			while ((line = br.readLine()) != null) {
 				String[] str = line.split(",");
 				if(str[10].equals("WIFI")){
-					file.add(str);
+					_file.add(str);
 				}
 			}
 			br.close();
@@ -73,7 +75,6 @@ public class Records {
 			System.out.print("Error reading file\n" + ex);
 			System.exit(2);
 		}
-		return file;
 	}
 	/**
 	 * This function changes the input CSV file according the new CSV file requires 
@@ -87,13 +88,13 @@ public class Records {
 			for (int i = 0; i < files.length; i++) {
 				List<LineFile> merge = new ArrayList<LineFile>();
 				if(files[i].getName().endsWith("csv")&& (!files[i].isDirectory())){
-					List<String[]> file = readFile(files[i]);
-					String [] id = file.get(0);
+					readFile(files[i].getName());
+					String [] id = _file.get(0);
 					String ID = id[2].replace("model=", "");
 					int countNet =0;
 					Time time =new Time();
-					for (int j = 2; j < file.size(); j+=countNet) {
-						String[]s = file.get(j);
+					for (int j = 2; j < _file.size(); j+=countNet) {
+						String[]s = _file.get(j);
 						time = time.set_Date(s[3]);
 						List<Network> Wifi = new ArrayList<Network>();
 						double lat = Double.parseDouble(s[6]);
@@ -101,8 +102,8 @@ public class Records {
 						double alt = Double.parseDouble(s[8]);
 						Point_2D p = new Point_2D(lon, lat);
 						countNet =0;
-						for (int t = 2; t < file.size(); t++) {
-							String[] lines = file.get(t);
+						for (int t = 2; t < _file.size(); t++) {
+							String[] lines = _file.get(t);
 							Time time2 = new Time();
 							time2=time2.set_Date(lines[3]);
 							if (time2.is_Equal(time)){
@@ -130,12 +131,13 @@ public class Records {
 	}
 	/**
 	 * This function write the new Records to a CSV file
-	 * @param output output file name
+	 * @param fileName output file name
 	 */
-	public void toCsv(String output){
+	@Override
+	public void toCsv(String fileName){
 		try {
 
-			FileWriter fw = new FileWriter(output);
+			FileWriter fw = new FileWriter(fileName);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.append("Time");bw.append(',');bw.append("ID");bw.append(','); bw.append("LAT");bw.append(',');
 			bw.append("LON"); bw.append(',');bw.append("ALT"); bw.append(',');bw.append("#WIFI NETWORKS");

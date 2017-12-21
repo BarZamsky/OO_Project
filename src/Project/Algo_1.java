@@ -11,7 +11,7 @@ import java.util.List;
  * This class represents functions that read merge CSV file and calculate w-center for every mac address in it
  *@author Doriya, Noy, Bar
  */
-public class Algo_1{
+public class Algo_1 implements Functions{
 	private List<LineFile> _file;
 	private List<Algo_linefile> _fileList;
 	private ArrayList<Double> _wLat;
@@ -95,28 +95,12 @@ public class Algo_1{
 		wLat=sumLat/sumW;
 		wAlt=sumAlt/sumW;
 	}
-	/**
-	 * This function write the new csv file
-	 * @param output output csv file name
-	 */
-	public void toCsv2(String output){
-		try{
-			FileWriter fw = new FileWriter(output);
-			BufferedWriter bw = new BufferedWriter(fw);
-			for(Algo_linefile l : _fileList){
-				bw.write(l.toString().replace("[", "").replace("]", ""));
-				bw.write("\n");
-			}
-			bw.close();
-		}
-		catch(IOException ex) {
-			System.out.print("Error writing file\n" + ex);
-		}
-	}
+
 	/**
 	 * This function reads the merged csv input
 	 * @param fileName merged file name
 	 */
+	@Override
 	public void readFile(String fileName){
 		_file = new ArrayList<LineFile>();
 		try{
@@ -142,10 +126,26 @@ public class Algo_1{
 			System.exit(2);
 		}
 	}
+	@Override
+	public void toCsv(String fileName) {
+		try{
+			FileWriter fw = new FileWriter(fileName);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for(Algo_linefile l : _fileList){
+				bw.write(l.toString().replace("[", "").replace("]", ""));
+				bw.write("\n");
+			}
+			bw.close();
+		}
+		catch(IOException ex) {
+			System.out.print("Error writing file\n" + ex);
+		}
+	}
 	public static void main(String[] args) {
 		Algo_1 a = new Algo_1();
 		a.readFile("comb_BM3.csv");
 		a.locate_Mac();
-		a.toCsv2("algo1.csv");
+		a.toCsv("algo1.csv");
 	}
+
 }
