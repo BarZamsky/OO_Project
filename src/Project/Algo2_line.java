@@ -6,14 +6,6 @@ package Project;
  *
  */
 public class Algo2_line implements Comparable<Algo2_line>{
-	static final int POWER = 2;
-	static final int NORM = 10000;
-	static final double SIG_DIFF = 0.4;
-	static final int MIN_DIFF = 3;
-	static final int NO_SIGNAL = -120;
-	static final int DIFF_NO_SIG = 100;
-	static final int max_Signals = 4;
-
 	private double _weight; 
 	private int _signal,_diff;
 	private Point_2D _p;
@@ -21,14 +13,14 @@ public class Algo2_line implements Comparable<Algo2_line>{
 
 	public Algo2_line(LineFile l,int input_signal, int list_signal){ //algo_linefile ??
 		this._signal = list_signal;
-		if(_signal <= NO_SIGNAL){
-			_diff = DIFF_NO_SIG;
+		if(_signal <= Parameters.NO_SIGNAL){
+			_diff = Parameters.DIFF_NO_SIG;
 		}
 		else{
 			int dif = Math.abs(input_signal-(list_signal));
-			_diff = Math.max(dif,MIN_DIFF);
+			_diff = Math.max(dif,Parameters.MIN_DIFF);
 		}
-		_weight = NORM/(Math.pow(_diff, SIG_DIFF)*Math.pow(input_signal, POWER));
+		_weight = Parameters.NORM/(Math.pow(_diff, Parameters.SIG_DIFF)*Math.pow(input_signal, Parameters.POWER));
 		_p = l.getLocation();
 		alt = l.getAlt();
 	}

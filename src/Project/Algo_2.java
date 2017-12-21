@@ -15,7 +15,6 @@ import java.util.List;
  *
  */
 public class Algo_2 implements Functions{
-	static final int NO_SIGNAL = -120;
 	private List<List<Algo2_line>> _list; // the excel list for all MAC
 	private List<Algo2_calc> _comb; //combined list for the final calculates
 	private List<LineFile> _input;
@@ -44,7 +43,7 @@ public class Algo_2 implements Functions{
 							l.add(al);
 						}
 						else{
-							Algo2_line al =new Algo2_line(line_data,net.getSignal(),NO_SIGNAL);
+							Algo2_line al =new Algo2_line(line_data,net.getSignal(),Parameters.NO_SIGNAL);
 							l.add(al);
 						}
 					}
