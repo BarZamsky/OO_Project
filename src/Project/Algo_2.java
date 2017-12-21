@@ -86,7 +86,6 @@ public class Algo_2 implements Functions{
 		w_alt=sum_wAlt/sum_Weight;
 		w_lon=sum_wLon/sum_Weight;
 		w_lat=sum_wLat/sum_Weight;
-
 	}
 
 	/**

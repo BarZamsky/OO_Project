@@ -13,8 +13,8 @@ public class Network implements Comparable<Network> {
 
 /**
  * 
- * @param sSID the wifi name
- * @param mac the mac address
+ * @param sSID the WIFI name
+ * @param mac the MAC address
  * @param signal 
  * @param chanel
  */

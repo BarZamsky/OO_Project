@@ -1,7 +1,7 @@
 package Project;
 
 /**
- * This class represent a Time object of the wifi scan
+ * This class represent a Time object of the WIFI scan
  * @author Bar,Noy,Doriya
  *
  */
@@ -53,7 +53,7 @@ public class Time {
 		return _time;
 	}
 	/**
-	 * This function take a String from the csv file and adapt it to the Time object
+	 * This function take a String from the CSV file and adapt it to the Time object
 	 * for Algo1
 	 * @param time String time
 	 * @return new Time object

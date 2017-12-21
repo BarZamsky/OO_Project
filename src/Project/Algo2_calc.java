@@ -1,7 +1,7 @@
 package Project;
 
 /**
-* This class represents the an object of Location and PI for Algo2
+* This class represents an object of Location and PI for Algo2
  * @author Noy, Bar, Doriya
  *
  */

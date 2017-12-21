@@ -10,8 +10,13 @@ public class Algo2_line implements Comparable<Algo2_line>{
 	private int _signal,_diff;
 	private Point_2D _p;
 	private double alt;
-
-	public Algo2_line(LineFile l,int input_signal, int list_signal){ //algo_linefile ??
+/**
+ * This function get 2 signals and determines the weight and the diff
+ * @param l
+ * @param input_signal
+ * @param list_signal
+ */
+	public Algo2_line(LineFile l,int input_signal, int list_signal){
 		this._signal = list_signal;
 		if(_signal <= Parameters.NO_SIGNAL){
 			_diff = Parameters.DIFF_NO_SIG;

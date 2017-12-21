@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * This class represents functions that read merge CSV file and calculate w-center for every mac address in it
+ * This class represents functions that read merge CSV file and calculate w-center for every MAC address in it
  *@author Doriya, Noy, Bar
  */
 public class Algo_1 implements Functions{
@@ -24,7 +24,7 @@ public class Algo_1 implements Functions{
 		_file = new ArrayList<LineFile>();
 	}
 	/**
-	 * This function go over the list and for every mac address in it 
+	 * This function go over the list and for every MAC address in it 
 	 * calculate the wLat,wLon,wAlt according to the demands
 	 */
 	public void locate_Mac(){
@@ -62,8 +62,8 @@ public class Algo_1 implements Functions{
 		}
 	}
 	/**
-	 * This function search in the list for same mac address as given 
-	 * @param mac the mac to search in the list
+	 * This function search in the list for same MAC address as given 
+	 * @param mac the MAC to search in the list
 	 * @param _file LineFile list
 	 * @return new Algo1_line list
 	 */
@@ -97,7 +97,7 @@ public class Algo_1 implements Functions{
 	}
 
 	/**
-	 * This function reads the merged csv input
+	 * This function reads the merged CSV input
 	 * @param fileName merged file name
 	 */
 	@Override
@@ -147,5 +147,4 @@ public class Algo_1 implements Functions{
 		a.locate_Mac();
 		a.toCsv("algo1.csv");
 	}
-
 }
