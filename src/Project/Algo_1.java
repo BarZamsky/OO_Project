@@ -13,13 +13,14 @@ import java.util.List;
  */
 public class Algo_1 implements Functions{
 	private List<LineFile> _file;
-	private List<Algo_linefile> _fileList;
+	private List<Algo1_linefile> _fileList;
 	private ArrayList<Double> _wLat;
 	private ArrayList<Double> _wLon;
 	private ArrayList<Double> _wAlt;
 	private ArrayList<Double> _wWeigth;
 	private double wLon,wLat,wAlt;
-
+	public static int max_Signal=4;
+	
 	public Algo_1(){
 		_file = new ArrayList<LineFile>();
 	}
@@ -28,7 +29,7 @@ public class Algo_1 implements Functions{
 	 * calculate the wLat,wLon,wAlt according to the demands
 	 */
 	public void locate_Mac(){
-		_fileList = new ArrayList<Algo_linefile>();
+		_fileList = new ArrayList<Algo1_linefile>();
 		for(LineFile l : _file){
 			List<Algo1_line> line = new ArrayList<Algo1_line>();
 			_wLat = new ArrayList<Double>();
@@ -44,7 +45,7 @@ public class Algo_1 implements Functions{
 					line = search(mac, _file);
 
 					line.sort(null);
-					for(int i=0;i<Parameters.max_Signals && i<line.size();i++){
+					for(int i=0;i<max_Signal && i<line.size();i++){
 						double lat = line.get(i).getLocation().getLat();
 						double lon = line.get(i).getLocation().getLon();
 						double alt = line.get(i).getAlt();
@@ -56,7 +57,7 @@ public class Algo_1 implements Functions{
 					}
 
 					calc_Wsum();
-					_fileList.add(new Algo_linefile(l.getTime(), new Point_2D(wLon, wLat), wAlt, net.get(0)));
+					_fileList.add(new Algo1_linefile(l.getTime(), new Point_2D(wLon, wLat), wAlt, net.get(0)));
 				}
 			}
 		}
@@ -85,7 +86,7 @@ public class Algo_1 implements Functions{
 	 */
 	public void calc_Wsum(){
 		double sumAlt=0,sumLon=0,sumLat=0,sumW=0;
-		for(int i=0; i<Parameters.max_Signals && i<_wAlt.size() && i<_wLon.size() && i<_wLat.size() && i< _wWeigth.size();i++){
+		for(int i=0; i<max_Signal && i<_wAlt.size() && i<_wLon.size() && i<_wLat.size() && i< _wWeigth.size();i++){
 			sumAlt+=_wAlt.get(i);
 			sumLon+=_wLon.get(i);
 			sumLat+=_wLat.get(i);
@@ -131,7 +132,7 @@ public class Algo_1 implements Functions{
 		try{
 			FileWriter fw = new FileWriter(fileName);
 			BufferedWriter bw = new BufferedWriter(fw);
-			for(Algo_linefile l : _fileList){
+			for(Algo1_linefile l : _fileList){
 				bw.write(l.toString().replace("[", "").replace("]", ""));
 				bw.write("\n");
 			}

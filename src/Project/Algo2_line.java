@@ -16,8 +16,10 @@ public class Algo2_line implements Comparable<Algo2_line>{
 	
 	private double _weight; 
 	private int _signal,_diff;
+	private Point_2D _p;
+	private double alt;
 
-	public Algo2_line(int input_signal, int list_signal){ //algo_linefile ??
+	public Algo2_line(LineFile l,int input_signal, int list_signal){ //algo_linefile ??
 		this._signal = list_signal;
 		if(_signal <= NO_SIGNAL){
 			_diff = DIFF_NO_SIG;
@@ -27,7 +29,26 @@ public class Algo2_line implements Comparable<Algo2_line>{
 			_diff = Math.max(dif,MIN_DIFF);
 		}
 		_weight = NORM/(Math.pow(_diff, SIG_DIFF)*Math.pow(input_signal, POWER));
+		_p = l.getLocation();
+		alt = l.getAlt();
 	}
+	
+	public Point_2D get_p() {
+		return _p;
+	}
+
+	public void set_p(Point_2D _p) {
+		this._p = _p;
+	}
+
+	public double getAlt() {
+		return alt;
+	}
+
+	public void setAlt(double alt) {
+		this.alt = alt;
+	}
+
 	public int get_signal() {
 		return _signal;
 	}
