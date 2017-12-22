@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * This class represents functions that read merge CSV file and calculate w-center for every MAC address in it
+ * This class represents functions to calculate w-center for every MAC address in the merge CSV file
  *@author Doriya, Noy, Bar
  */
 public class Algo_1 implements Functions{
@@ -126,6 +126,9 @@ public class Algo_1 implements Functions{
 			System.exit(2);
 		}
 	}
+	/**
+	 * This functions write the list to CSV file
+	 */
 	@Override
 	public void toCsv(String fileName) {
 		try{

@@ -1,6 +1,6 @@
 package Project;
 /**
- * This class creates linefile for Algo1 
+ * This class creates linefile for Algo1 CSV output
  * @author Bar, Noy ,Doriya
  *
  */

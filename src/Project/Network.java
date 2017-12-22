@@ -12,7 +12,6 @@ public class Network implements Comparable<Network> {
 	private boolean isTaken ;
 
 /**
- * 
  * @param sSID the WIFI name
  * @param mac the MAC address
  * @param signal 

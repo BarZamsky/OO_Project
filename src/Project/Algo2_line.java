@@ -12,9 +12,9 @@ public class Algo2_line implements Comparable<Algo2_line>{
 	private double alt;
 /**
  * This function get 2 signals and determines the weight and the diff
- * @param l
+ * @param l linefile of the input CSV file
  * @param input_signal
- * @param list_signal
+ * @param list_signal our data signal
  */
 	public Algo2_line(LineFile l,int input_signal, int list_signal){
 		this._signal = list_signal;
