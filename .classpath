@@ -3,10 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/JavaAPIforKml-2.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/jaxb-api-2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/jaxb-impl-2.1.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/noytvili/Desktop/לימודים/שנה ב/סמסטר א/מונחה עצמים/New folder/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/noytvili/Desktop/לימודים/שנה ב/סמסטר א/מונחה עצמים/New folder/JavaAPIforKml-2.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/noytvili/Desktop/לימודים/שנה ב/סמסטר א/מונחה עצמים/New folder/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/noytvili/Desktop/לימודים/שנה ב/סמסטר א/מונחה עצמים/New folder/jaxb-impl-2.1.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/noytvili/Desktop/לימודים/שנה ב/סמסטר א/מונחה עצמים/New folder/jsr173_api-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
