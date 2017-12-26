@@ -69,7 +69,7 @@ public class Filter_Your_File {
 	}
 	public static void main(String[] args) {
 		Records r = new Records();
-		r.parseFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented");
+		r.parseFile("C:\\Users\\noytvili\\git\\OO_Project");
 		r.toCsv("Merge_File.csv");
 		r.csv2Kml("Merge_File_kml.kml");
 		Scanner s = new Scanner(System.in);
