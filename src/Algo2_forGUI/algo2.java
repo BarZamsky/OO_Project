@@ -1,4 +1,4 @@
-package Algorithms;
+package Algo2_forGUI;
 
 import java.util.ArrayList;
 import java.util.List;

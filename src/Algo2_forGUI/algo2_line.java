@@ -1,4 +1,4 @@
-package Algorithms;
+package Algo2_forGUI;
 
 import Project.Parameters;
 import Project.Point_2D;

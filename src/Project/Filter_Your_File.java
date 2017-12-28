@@ -1,5 +1,7 @@
 package Project;
 import java.util.Scanner;
+
+import Filters.filter;
 /**
  * This class is the main class of our project. 
  * You can create CSV file, filter it by Time,Location or ID and create a kml file
