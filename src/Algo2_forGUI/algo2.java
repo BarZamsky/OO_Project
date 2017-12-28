@@ -1,79 +1,186 @@
 package Algo2_forGUI;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import Project.LineFile;
-import Project.Network;
-import Project.Parameters;
-import Project.Point_2D;
-import Project.Records;
+
+import Project.*;
+
 /**
- * This class represents functions that calculate the location of the user
- * by 3 MAC address and 3 signals
- * @author noytvili
+ * This class represents functions to take one line from no_gps file and find w-center point
+ * @author Bar,Doriya, Noy
+ *
  */
-public class algo2 {
+public class algo2 implements Functions{
+	static final int NO_SIGNAL = -120;
+	private List<List<Algo2_line>> _list; // the excel list for all MAC
+	private List<Algo2_calc> _comb; //combined list for the final calculates
+	private LineFile _input;
+	private List<LineFile> _data;
+	private double _alt; 
+	private Point_2D _point;;
+	private double w_alt, w_lon, w_lat;
 
-	private algo2_line _mac1,_mac2,_mac3;
-	private double _pi;
-	private double _wWeight,_wLat,_wLon,_wAlt;
-	private double sum_wAlt,sum_wLon,sum_wLat,sum_Weight;
+	/**
+	 * This function go over the Input list and search every MAC address in the Data list
+	 * return the new location in the Input file
+	 */
+	public void search_Mac(){
+			_list = new ArrayList<List<Algo2_line>>();
+			_comb = new ArrayList<Algo2_calc>();
+			List<Network> n = _input.getNetwork();
+			for(Network net : n){
+				List<Algo2_line> l = new ArrayList<Algo2_line>();
+				String mac_input = net.getMac();
+				for(LineFile line_data : _data){
+					List<Network> _wifi = line_data.getNetwork();
+					for(Network wifi : _wifi){
+						if(wifi.getMac().equals(mac_input)){
+							Algo2_line al = new Algo2_line(line_data,net.getSignal(), wifi.getSignal());
+							l.add(al);
+						}
+						else{
+							Algo2_line al =new Algo2_line(line_data,net.getSignal(),NO_SIGNAL);
+							l.add(al);
+						}
+					}
+				}
+				_list.add(l);
+			}
+			int wifi_Number = _list.size();// the List<List> size
+			int list_size = _list.get(0).size();//each list size
 
-	public algo2(algo2_line _mac1, algo2_line _mac2, algo2_line _mac3) {
-		this._mac1 = _mac1;
-		this._mac2 = _mac2;
-		this._mac3 = _mac3;
-		_pi = _mac1.get_weight()*_mac2.get_weight()*_mac3.get_weight();
-		//		_wLat = linefile.getLocation().getLat()*_pi;
-		//		_wLon = linefile.getLocation().getLon()*_pi;
-		//		_wAlt = linefile.getAlt()*_pi;
+			for(int j=0;j<list_size;j++){
+				double pi = 1.0;
+				for(int i =0;i<wifi_Number;i++){
+					List<Algo2_line> ls = _list.get(i);
+					Algo2_line alg = ls.get(j);
+					pi*=alg.get_weight();
+					_point = alg.get_p();
+					_alt = alg.getAlt();
+				}
+				_comb.add(new Algo2_calc(_point,_alt,pi));
+			}
+			_comb.sort(null);
+			calc_Weight();
+			_input.setAlt(w_alt);
+			_input.setLocation(new Point_2D(w_lon, w_lat));
 	}
 
-	public void find_Mac(Records _rec, String mac1,int signal1,String mac2,int signal2, String mac3,int signal3){
-		List<LineFile> _line = _rec.get_rec();
-		List<algo2_line> algo1 = new ArrayList<algo2_line>();
-		List<algo2_line> algo2 = new ArrayList<algo2_line>();
-		List<algo2_line> algo3 = new ArrayList<algo2_line>();
-		List<algo2> comb = new ArrayList<algo2>();
-		for(LineFile line : _line){ 
-			List<Network> _wifi = line.getNetwork();
-			for(Network wifi : _wifi){
-				if(wifi.getMac().equals(mac1)){
-					algo1.add(new algo2_line(signal1, wifi.getSignal(),line.getAlt(),line.getLocation()));
+	/**
+	 * this function calculate the wLat,wLon,wAlt according to the demands
+	 * and the final w_alt, w_lat, w_lon to create a new location
+	 */
+	public void calc_Weight(){
+		double sum_wAlt = 0, sum_wLon = 0, sum_wLat = 0, sum_Weight = 0;
+		for (int i=0; i < 3 && i<_comb.size(); i++){
+
+			sum_wAlt += _comb.get(i).get_alt()*_comb.get(i).get_pi();
+			sum_wLon += _comb.get(i).get_point().getLon()*_comb.get(i).get_pi();
+			sum_wLat += _comb.get(i).get_point().getLat()*_comb.get(i).get_pi();
+			sum_Weight+= _comb.get(i).get_pi();
+		}
+		w_alt=sum_wAlt/sum_Weight;
+		w_lon=sum_wLon/sum_Weight;
+		w_lat=sum_wLat/sum_Weight;
+	}
+
+	/**
+	 * Reading from no GPS file.
+	 * @param fileName
+	 * @return List
+	 */
+	@Override
+	public void readFile(String fileName){
+		try{
+			FileReader fr = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(fr);
+			String line="";
+			while ((line = br.readLine()) != null) {
+				String[] str = line.split(",");
+				List<Network> net = new ArrayList<Network>();
+				Time time = new Time();
+				time = time.set_Date(str[0]);
+				for(int i=6;i<str.length;i+=4){
+					Network n = new Network(str[i], str[i+1], Integer.parseInt(str[i+3]), str[i+2]);
+					net.add(n);
+				}
+				net.sort(null);
+				if(str[2].equals("?") ||str[3].equals("?") ||str[4].equals("?")){
+					Point_2D point = new Point_2D(0,0);
+					double alt = 0;
+					_input= new LineFile(time,str[1],point,alt,Integer.parseInt(str[5]), net);
 				}
 				else{
-					algo1.add(new algo2_line(signal1,Parameters.getNoSignal(),line.getAlt(),line.getLocation()));
-				}
-				if(wifi.getMac().equals(mac2)){
-					algo2.add(new algo2_line(signal2, wifi.getSignal(),line.getAlt(),line.getLocation()));
-				}
-				else{
-					algo2.add(new algo2_line(signal2,Parameters.getNoSignal(),line.getAlt(),line.getLocation()));
-				}
-				if(wifi.getMac().equals(mac3)){
-					algo3.add(new algo2_line(signal3, wifi.getSignal(),line.getAlt(),line.getLocation()));
-				}
-				else{
-					algo3.add(new algo2_line(signal3,Parameters.getNoSignal(),line.getAlt(),line.getLocation()));
+					Point_2D point = new Point_2D(Double.parseDouble(str[2]),Double.parseDouble(str[3]));
+					double alt =Double.parseDouble(str[4]);
+					_input= new LineFile(time,str[1],point,alt,Integer.parseInt(str[5]), net);
 				}
 			}
+			fr.close();
+			br.close();
 		}
-		algo1.sort(null);algo2.sort(null);algo3.sort(null);
-		for(int i=0; i<4;i++){
-			comb.add(new algo2(algo1.get(i),algo2.get(i),algo3.get(i)));
+		catch(IOException ex) {
+			System.out.print("Errorg reading file\n" + ex);
+			System.exit(2);
+		}
+	}
+	/**
+	 * Reading from merge input file (my merge file not boaz)
+	 * @param fileName
+	 */
+	public void readFile2(String fileName){
+		_data = new ArrayList<LineFile>();
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			String line=""; 
+			br.readLine();   
+			while ((line = br.readLine()) != null) {
+				String[] str = line.split(",");
+				List<Network> net = new ArrayList<Network>();
+				Point_2D point = new Point_2D(Double.parseDouble(str[3]),Double.parseDouble(str[2]));
+				Time time = new Time();
+				time = time.set_Date(str[0]);
+				for(int i=6;i<str.length;i+=4){ 
+					Network n = new Network(str[i], str[i+1], Integer.parseInt(str[i+2]), str[i+3]);
+					net.add(n);
+				} 
+				_data.add(new LineFile(time,str[1],point,Double.parseDouble(str[4]),Integer.parseInt(str[5]), net));
+			}
+			br.close();
+		}
+		catch(IOException ex) {
+			System.out.print("Error Algo2 reading comb file\n" + ex);
+			System.exit(2);
 		}
 	}
 
-	public void calc_Weight(algo2 algo){
-		double alt1 = algo._mac1.get_alt();
-		double alt2 = algo._mac2.get_alt();
-		double alt3 = algo._mac3.get_alt();
-		Point_2D m1 = algo._mac1.getLocation();
-		Point_2D m2 = algo._mac2.getLocation();
-		Point_2D m3 = algo._mac3.getLocation();
-		sum_wAlt= alt1+alt2+alt3;
-		sum_wLon=m1.getLon()+m2.getLon()+m3.getLon();
-		sum_wLat=m1.getLat()+m2.getLat()+m3.getLat();
-		sum_Weight = algo._mac1.get_weight()+algo._mac2.get_weight()+algo._mac3.get_weight();
+	/**
+	 * This function writes the new CSV file
+	 * @param output output CSV file name
+	 */
+	@Override
+	public void toCsv(String output){
+		try{
+			FileWriter fw = new FileWriter(output);
+			BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(_input.toString().replace("[", "").replace("]", ""));
+				bw.write("\n");
+			bw.close();
+		}
+		catch(IOException ex) {
+			System.out.print("Error writing file\n" + ex);
+		}
+	}
+	public static void main(String[] args) {
+		Algo_2 a = new Algo_2();
+		a.readFile("Book1.csv");
+		a.readFile2("comb_BM2.csv");
+		a.search_Mac();
+		a.toCsv("complete_File_Algo_2.csv");
 	}
 }
