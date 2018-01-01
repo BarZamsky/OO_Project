@@ -1,4 +1,4 @@
-package Algo2_forGUI;
+package GUI;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
