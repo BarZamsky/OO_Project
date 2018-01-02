@@ -144,7 +144,7 @@ public class algo2 implements Functions{
 				List<Network> net = new ArrayList<Network>();
 				Point_2D point = new Point_2D(Double.parseDouble(str[3]),Double.parseDouble(str[2]));
 				Time time = new Time();
-				time = time.set_Date(str[0]);
+				time = time.set_Date2(str[0]);
 				for(int i=6;i<str.length;i+=4){ 
 					Network n = new Network(str[i], str[i+1], Integer.parseInt(str[i+2]), str[i+3]);
 					net.add(n);

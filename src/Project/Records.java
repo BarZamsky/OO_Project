@@ -194,6 +194,7 @@ public class Records implements Functions{
 			e.printStackTrace();
 		}
 	}
+	
 	public int getSize(){
 		return _rec.size();
 	}

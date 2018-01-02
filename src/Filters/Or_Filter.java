@@ -1,8 +1,10 @@
 package Filters;
 
+import java.io.Serializable;
+
 import Project.LineFile;
 
-public class Or_Filter implements filter {
+public class Or_Filter implements filter, Serializable{
 	private filter _f1, _f2;
 	public Or_Filter(filter f1, filter f2) {
 		_f1 = f1;
@@ -11,5 +13,8 @@ public class Or_Filter implements filter {
 	@Override
 	public boolean test(LineFile line) {
 		return _f1.test(line) || _f2.test(line);
+	}
+	public String toString() {
+		return "("+_f1+" or "+_f2+")";
 	}
 }
