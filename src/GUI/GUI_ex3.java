@@ -8,6 +8,13 @@ import GUI.Choose_folder;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.ArrayList;
 import java.awt.*;
 import Filters.filter_Rec;
 import javax.swing.*;
@@ -645,5 +652,63 @@ public class GUI_ex3{
 				algo_panel.setVisible(false);
 			}
 		});
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Path path = Paths.get("C:/Users/Doriya Spielman/git/OO_Project");
+					WatchService watchService;
+					watchService = path.getFileSystem().newWatchService();
+
+					path.register(watchService,
+							StandardWatchEventKinds.ENTRY_CREATE,
+							StandardWatchEventKinds.ENTRY_MODIFY,
+							StandardWatchEventKinds.ENTRY_DELETE);
+
+					while(true) {
+						WatchKey watchKey = null;
+						try {
+							watchKey = watchService.take();
+
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						for (WatchEvent<?> event : watchKey.pollEvents()) {
+							if(event.kind().name().equals("ENTRY_CREATE")) {
+								_rec = new Records();
+								File file =new File(fileName+".csv");
+								file.delete();
+								JOptionPane.showMessageDialog(algo_panel,
+										"DB Was Changed !!!",
+										"WOW WOW WOW",
+										JOptionPane.WARNING_MESSAGE);
+							
+								_rec = new Records();
+								_rec.parseFile("C:/Users/Doriya Spielman/git/OO_Project");
+								_rec.toCsv(fileName+".csv");
+								JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
+									
+								//}
+							}
+//							NumberOfMAC.setText(""+CreateDB.MacCounter);
+//							NumberOfRecords.setText(""+CreateDB.Records);
+						//	frame.repaint();
+						//	repaint();
+						}
+						if(!watchKey.reset()) {
+							watchKey.cancel();
+							watchService.close();
+						}
+					}
+				} 
+				catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e);
+				}
+			}
+
+		}).start();
 	}   
 }
