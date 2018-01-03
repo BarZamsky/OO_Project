@@ -59,7 +59,7 @@ public class Records implements Functions{
 	 */
 	@Override
 	public void readFile(String fileName){
-		 _file = new ArrayList<String[]>();
+		_file = new ArrayList<String[]>();
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
 			String line="";
@@ -194,8 +194,23 @@ public class Records implements Functions{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getSize(){
 		return _rec.size();
+	}
+
+	public int getNumMac(){
+		ArrayList<String> mac = new ArrayList<>();
+
+		String tempMac="";
+		for (LineFile l : _rec) {
+			for (int i = 0; i < l.getNetwork().size(); i++) {
+				tempMac=l.getNetwork().get(i).Mac;
+					if(!mac.contains(tempMac))
+						mac.add(tempMac);
+							
+			}
+		}
+		return mac.size();
 	}
 }
