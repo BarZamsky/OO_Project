@@ -208,7 +208,7 @@ public class GUI_ex3{
 		btnSaveCombCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_rec = new Records();
-				_rec.parseFile((String)panel.chooser.getSelectedFile().getPath());
+				_rec.parseFile((String)panel.chooser.getSelectedFile().getPath(),fileName);
 				_rec.toCsv(fileName+".csv");
 				JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
 			}
@@ -676,27 +676,18 @@ public class GUI_ex3{
 							e1.printStackTrace();
 						}
 						for (WatchEvent<?> event : watchKey.pollEvents()) {
-							if(event.kind().name().equals("ENTRY_CREATE")) {
+							if((event.kind().name().equals("ENTRY_CREATE"))||
+								(event.kind().name().equals("ENTRY_DELETE"))||
+								(event.kind().name().equals("ENTRY_MODIFY"))) {
+								JOptionPane.showMessageDialog(frame.getContentPane(),"Records Was Changed !!!","change",JOptionPane.WARNING_MESSAGE);
+							//check the window
 								_rec = new Records();
-								File file =new File(fileName+".csv");
-								file.delete();
-								JOptionPane.showMessageDialog(algo_panel,
-										"DB Was Changed !!!",
-										"WOW WOW WOW",
-										JOptionPane.WARNING_MESSAGE);
-							
-								_rec = new Records();
-								_rec.parseFile("C:/Users/Doriya Spielman/git/OO_Project");
-								_rec.toCsv(fileName+".csv");
-								JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
-									
-								//}
+								_rec.parseFile("C:/Users/Doriya Spielman/git/OO_Project",fileName);
+						_rec.toCsv(fileName+"new");
 							}
-//							NumberOfMAC.setText(""+CreateDB.MacCounter);
-//							NumberOfRecords.setText(""+CreateDB.Records);
-						//	frame.repaint();
-						//	repaint();
+
 						}
+						
 						if(!watchKey.reset()) {
 							watchKey.cancel();
 							watchService.close();
