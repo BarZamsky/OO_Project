@@ -325,8 +325,9 @@ public class GUI_ex3{
 		filter_panel.add(Load);
 		Load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				_filter = new filter_Rec();
 				_filter.deserializeFromFile("C:\\Users\\a\\git\\OO_Project\\ObjectOriented\\"+filter+".ser");
-				JOptionPane.showMessageDialog(null, "Press on Creatre CSV");
+				JOptionPane.showMessageDialog(null, "Press on save filter");
 			}
 		});
 		//////////////////////////////

@@ -19,7 +19,7 @@ import Project.Time;
  *
  */
 public class filter_Rec implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	private List<filter> _cond;
 	private filter _f1;
@@ -54,26 +54,25 @@ public class filter_Rec implements Serializable{
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-		public void deserializeFromFile(String path) {
-			filter_Rec fr = null;
-			try {
-				FileInputStream fileIn = new FileInputStream(path);
-				ObjectInputStream in = new ObjectInputStream(fileIn);
-				fr = (filter_Rec) in.readObject();
-				in.close();
-				fileIn.close();
-				fr.getFilters();
-//				_toString = fr._f1.toString()+fr._f2.toString();
-			} catch (IOException i) {
-				System.out.println("Error loading Filter\n");
-				i.printStackTrace();
-				return;
-			} catch (ClassNotFoundException c) {
-				System.out.println("Filter not found\n");
-				c.printStackTrace();
-				return;
-			}
+	public void deserializeFromFile(String path) {
+		filter_Rec fr = null;
+		try {
+			FileInputStream fileIn = new FileInputStream(path);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			fr = (filter_Rec) in.readObject();
+			in.close();
+			fileIn.close();
+			fr.getFilters();
+		} catch (IOException i) {
+			System.out.println("Error loading Filter\n");
+			i.printStackTrace();
+			return;
+		} catch (ClassNotFoundException c) {
+			System.out.println("Filter not found\n");
+			c.printStackTrace();
+			return;
 		}
+	}
 
 	/**
 	 * This function create filter by model
@@ -108,14 +107,14 @@ public class filter_Rec implements Serializable{
 			Point_2D p = new Point_2D(lon, lat);
 			filter f_location = list->!(list.getLocation().distanceTo(p)<=radius);
 			_cond.add(f_location);
-			_toString +="Not location distance:" +lat+","+lon+"from radius:"+radius;
+			_toString +="Not location distance:" +lat+","+lon+"from radius:"+radius+"; ";
 			_f1 = f_location;
 		}
 		else{
 			Point_2D p = new Point_2D(lon, lat);
 			filter f_location = list->list.getLocation().distanceTo(p)<=radius;
 			_cond.add(f_location);
-			_toString +="location distance:" +lat+","+lon+"from radius:"+radius;;
+			_toString +="location distance:" +lat+","+lon+"from radius:"+radius+"; ";;
 			_f1 = f_location;
 		}
 	}
@@ -131,7 +130,7 @@ public class filter_Rec implements Serializable{
 			Time t_end = new Time();
 			filter f_time = list->!(list.getTime().time_Between(t_start.set_Date(start) , t_end.set_Date(end)));
 			_cond.add(f_time);
-			_toString +="Not time between:"+start+","+end;
+			_toString +="Not time between:"+start+","+end+"; ";
 			_f1 = f_time;
 		}
 		else{
@@ -139,7 +138,7 @@ public class filter_Rec implements Serializable{
 			Time t_end = new Time();
 			filter f_time = list->list.getTime().time_Between(t_start.set_Date(start) , t_end.set_Date(end));
 			_cond.add(f_time);
-			_toString +="Time between:"+start+","+end;;
+			_toString +="Time between:"+start+","+end+"; ";;
 			_f1 = f_time;
 		}
 	}
@@ -152,13 +151,13 @@ public class filter_Rec implements Serializable{
 		if(not == true){
 			filter f_model = list->!(list.getModel().equals(model.toUpperCase()));
 			_cond.add(f_model);
-			_toString +="Model not equals to:" +model;
+			_toString +="Model not equals to:" +model+"; ";
 			_f2 = f_model;
 		}
 		else{
 			filter f_model = list->list.getModel().equals(model);
 			_cond.add(f_model);
-			_toString +="Model equals to:" +model;
+			_toString +="Model equals to:" +model+"; ";
 			_f2 = f_model;
 		}
 	}
@@ -175,14 +174,14 @@ public class filter_Rec implements Serializable{
 			Point_2D p = new Point_2D(lon, lat);
 			filter f_location = list->!(list.getLocation().distanceTo(p)<=radius);
 			_cond.add(f_location);
-			_toString +="Not location distance:" +lat+","+lon+"from radius:"+radius;
+			_toString +="Not location distance:" +lat+","+lon+"from radius:"+radius+"; ";
 			_f2 = f_location;
 		}
 		else{
 			Point_2D p = new Point_2D(lon, lat);
 			filter f_location = list->list.getLocation().distanceTo(p)<=radius;
 			_cond.add(f_location);
-			_toString +="location distance:" +lat+","+lon+"from radius:"+radius;
+			_toString +="location distance:" +lat+","+lon+"from radius:"+radius+"; ";
 			_f2 = f_location;
 		}
 	}
@@ -198,7 +197,7 @@ public class filter_Rec implements Serializable{
 			Time t_end = new Time();
 			filter f_time = list->!(list.getTime().time_Between(t_start.set_Date(start) , t_end.set_Date(end)));
 			_cond.add(f_time);
-			_toString +="Not time between:"+start+","+end;
+			_toString +="Not time between:"+start+","+end+"; ";
 			_f2 = f_time;
 		}
 		else{
@@ -206,11 +205,11 @@ public class filter_Rec implements Serializable{
 			Time t_end = new Time();
 			filter f_time = list->list.getTime().time_Between(t_start.set_Date(start) , t_end.set_Date(end));
 			_cond.add(f_time);	
-			_toString +="Time between:"+start+","+end;
+			_toString +="Time between:"+start+","+end+"; ";
 			_f2 = f_time;
 		}
 	}
-	
+
 	/**
 	 * This function filtering the Records of the WIFI scans
 	 * @param _rec
@@ -223,26 +222,26 @@ public class filter_Rec implements Serializable{
 			_rec.csv2Kml("filteredFile.kml");	
 		}
 		else{
-		if(gate.equals("Or")){
-			Or_Filter or = new Or_Filter(_cond.get(0),_cond.get(1));
-			_toString+=" (||)";
-			_rec = _rec.filter(or);
-			_rec.toCsv("filteredFile.csv");
-			_rec.csv2Kml("filteredFile.kml");
-		}
-		if(gate.equals("And")){
-			And_Filter and = new And_Filter(_cond.get(0),_cond.get(1));
-			_toString+=" (&&)";
-			_rec = _rec.filter(and);
-			_rec.toCsv("filteredFile.csv");
-			_rec.csv2Kml("filteredFile.kml");
-		}
+			if(gate.equals("Or")){
+				Or_Filter or = new Or_Filter(_cond.get(0),_cond.get(1));
+				_toString+=" (||)";
+				_rec = _rec.filter(or);
+				_rec.toCsv("filteredFile.csv");
+				_rec.csv2Kml("filteredFile.kml");
+			}
+			if(gate.equals("And")){
+				And_Filter and = new And_Filter(_cond.get(0),_cond.get(1));
+				_toString+=" (&&)";
+				_rec = _rec.filter(and);
+				_rec.toCsv("filteredFile.csv");
+				_rec.csv2Kml("filteredFile.kml");
+			}
 		}
 	}
 	public void getFilters(){
 		if(_cond.size()==1){
-		 _f1 = _cond.get(0);
-		 _toString=_f1.toString();
+			_f1 = _cond.get(0);
+			_toString=_f1.toString();
 		}
 		else{
 			_f1=_cond.get(0);
