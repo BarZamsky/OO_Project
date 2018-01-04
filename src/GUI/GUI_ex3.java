@@ -156,6 +156,7 @@ public class GUI_ex3{
 						frame.setSize(panel.getPreferredSize());
 						frame.setVisible(true);
 					}
+					
 				});
 			}
 		});
