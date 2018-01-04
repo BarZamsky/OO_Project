@@ -69,6 +69,8 @@ public class Records implements Functions{
 				if(str[10].equals("WIFI")){
 					_file.add(str);
 				}
+				
+				
 			}
 			br.close();
 		}
@@ -81,6 +83,8 @@ public class Records implements Functions{
 	 * This function changes the input CSV file according the new CSV file requires 
 	 * @param path folder location
 	 */
+	
+	
 	public void parseFile(String path){
 		try{
 			File f = new File(path);
@@ -122,11 +126,13 @@ public class Records implements Functions{
 						merge.add(new LineFile(time,ID,p,alt,countNet,Wifi2));
 					}
 				}
+		
 				this._rec.addAll(merge);
 			}
 		}
 		catch(Exception ex) {
-			System.out.print("Error parsing file\n" + ex);
+			//System.out.print("Error parsing file\n" + ex);
+			ex.printStackTrace();
 			System.exit(2);
 		}
 	}
@@ -138,14 +144,14 @@ public class Records implements Functions{
 	public void toCsv(String fileName){
 		try {
 
-			FileWriter fw = new FileWriter(fileName);
+			FileWriter fw = new FileWriter("C:\\Users\\Doriya Spielman\\git\\OO_Project\\Output_Files\\"+fileName+".csv");
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.append("Time");bw.append(',');bw.append("ID");bw.append(','); bw.append("LAT");bw.append(',');
 			bw.append("LON"); bw.append(',');bw.append("ALT"); bw.append(',');bw.append("#WIFI NETWORKS");
 			bw.append(',');
 			for (int i = 1; i <11; i++) {
 				bw.append("SSID"+i+','+"MAC"+i+','+"SIGNAL"+i+','+"FREQUENCY"+i);
-				bw.append(',');
+				bw.append(','); 
 			}
 			bw.write("\n");
 			for(LineFile l : _rec){
