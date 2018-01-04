@@ -168,12 +168,8 @@ public class GUI_ex3{
 				int numR = _rec.getSize();
 				JOptionPane.ICON_PROPERTY.toString();
 				JOptionPane.showMessageDialog(null, "You captured "+numR+" records");
-				int routers = 0;
-				for(int i=0;i<_rec.getSize();i++){
-					LineFile line = _rec.get_rec().get(i);
-					routers+=line.getNumOfNetworks();
-				}
-				JOptionPane.showMessageDialog(null, "You captured "+routers+" routers total in all the scans");
+				int mac = _rec.getNumMac();
+				JOptionPane.showMessageDialog(null, "You captured "+mac+" macs total in all the scans");
 			}
 		});
 
@@ -657,7 +653,7 @@ public class GUI_ex3{
 			@Override
 			public void run() {
 				try {
-					Path path = Paths.get("C:/Users/a/git/OO_Project");
+					Path path = Paths.get("C:\\Users\\Doriya Spielman\\git\\OO_Project");
 					WatchService watchService;
 					watchService = path.getFileSystem().newWatchService();
 
@@ -682,7 +678,7 @@ public class GUI_ex3{
 								JOptionPane.showMessageDialog(frame.getContentPane(),"Records Was Changed !!!","change",JOptionPane.WARNING_MESSAGE);
 							//check the window
 								_rec = new Records();
-								_rec.parseFile("C:/Users/a/git/OO_Project");
+								_rec.parseFile("C:\\Users\\Doriya Spielman\\git\\OO_Project");
 						_rec.toCsv(fileName+"new.csv");
 							}
 
