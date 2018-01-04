@@ -28,6 +28,7 @@ public class Choose_folder extends JPanel implements ActionListener {
 	    //    
 	    if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
 	    	chooser.getApproveButtonText();
+	    	go.setVisible(false);
 	      }
 	    else {
 	    JOptionPane.showMessageDialog(null, "No selection");
