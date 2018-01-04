@@ -2,7 +2,6 @@ package GUI;
 
 import Project.Algo_1;
 
-import Project.LineFile;
 import Project.Records;
 import GUI.Choose_folder;
 import java.awt.event.*;
@@ -14,7 +13,6 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.ArrayList;
 import java.awt.*;
 import Filters.filter_Rec;
 import javax.swing.*;
