@@ -31,6 +31,7 @@ public class GUI_ex3{
 	private Records _rec ;
 	private JTextField textField;
 	private String fileName="";
+	private String path="";
 	private String start="",start2="";
 	private String end="",end2="";
 	private String model="",model1="";
@@ -203,8 +204,9 @@ public class GUI_ex3{
 		btnSaveCombCsv.setFont(new Font("Gisha", Font.PLAIN, 22));
 		btnSaveCombCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			path=(String)panel.chooser.getSelectedFile().getAbsolutePath();
 				_rec = new Records();
-				_rec.parseFile((String)panel.chooser.getSelectedFile().getAbsolutePath());
+				_rec.parseFile(path);
 				_rec.toCsv(fileName+".csv");
 				JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
 			}
@@ -653,11 +655,11 @@ public class GUI_ex3{
 			@Override
 			public void run() {
 				try {
-					Path path = Paths.get("C:\\Users\\Doriya Spielman\\git\\OO_Project");
+					Path path2 = Paths.get(path);
 					WatchService watchService;
-					watchService = path.getFileSystem().newWatchService();
+					watchService = path2.getFileSystem().newWatchService();
 
-					path.register(watchService,
+					path2.register(watchService,
 							StandardWatchEventKinds.ENTRY_CREATE,
 							StandardWatchEventKinds.ENTRY_MODIFY,
 							StandardWatchEventKinds.ENTRY_DELETE);
@@ -676,10 +678,8 @@ public class GUI_ex3{
 								(event.kind().name().equals("ENTRY_DELETE"))||
 								(event.kind().name().equals("ENTRY_MODIFY"))) {
 								JOptionPane.showMessageDialog(frame.getContentPane(),"Records Was Changed !!!","change",JOptionPane.WARNING_MESSAGE);
-							//check the window
 								_rec = new Records();
-								_rec.parseFile("C:\\Users\\Doriya Spielman\\git\\OO_Project");
-						_rec.toCsv(fileName+"new.csv");
+								_rec.parseFile(path);
 							}
 
 						}
