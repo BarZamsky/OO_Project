@@ -151,7 +151,7 @@ public class Records implements Functions{
 			bw.append(',');
 			for (int i = 1; i <11; i++) {
 				bw.append("SSID"+i+','+"MAC"+i+','+"SIGNAL"+i+','+"FREQUENCY"+i);
-				bw.append(',');
+				bw.append(','); 
 			}
 			bw.write("\n");
 			for(LineFile l : _rec){
