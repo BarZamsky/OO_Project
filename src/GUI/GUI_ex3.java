@@ -208,7 +208,7 @@ public class GUI_ex3{
 		btnSaveCombCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_rec = new Records();
-				_rec.parseFile((String)panel.chooser.getSelectedFile().getPath(),fileName);
+				_rec.parseFile((String)panel.chooser.getSelectedFile().getPath());
 				_rec.toCsv(fileName+".csv");
 				JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
 			}
@@ -657,7 +657,7 @@ public class GUI_ex3{
 			@Override
 			public void run() {
 				try {
-					Path path = Paths.get("C:/Users/Doriya Spielman/git/OO_Project");
+					Path path = Paths.get("C:/Users/a/git/OO_Project");
 					WatchService watchService;
 					watchService = path.getFileSystem().newWatchService();
 
@@ -682,8 +682,8 @@ public class GUI_ex3{
 								JOptionPane.showMessageDialog(frame.getContentPane(),"Records Was Changed !!!","change",JOptionPane.WARNING_MESSAGE);
 							//check the window
 								_rec = new Records();
-								_rec.parseFile("C:/Users/Doriya Spielman/git/OO_Project",fileName);
-						_rec.toCsv(fileName+"new");
+								_rec.parseFile("C:/Users/a/git/OO_Project");
+						_rec.toCsv(fileName+"new.csv");
 							}
 
 						}
