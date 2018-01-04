@@ -200,11 +200,19 @@ public class Records implements Functions{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 
+	 * @return the number of rows in the Record.
+	 */
 
 	public int getSize(){
 		return _rec.size();
 	}
 
+	/**
+	 * this function count different MAC in the Records.
+	 * @return number of mac.
+	 */
 	public int getNumMac(){
 		ArrayList<String> mac = new ArrayList<>();
 
