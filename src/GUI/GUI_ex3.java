@@ -208,7 +208,7 @@ public class GUI_ex3{
 		btnSaveCombCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_rec = new Records();
-				_rec.parseFile((String)panel.chooser.getSelectedFile().getPath());
+				_rec.parseFile((String)panel.chooser.getSelectedFile().getAbsolutePath());
 				_rec.toCsv(fileName+".csv");
 				JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
 			}

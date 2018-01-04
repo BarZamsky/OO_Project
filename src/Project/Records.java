@@ -144,7 +144,7 @@ public class Records implements Functions{
 	public void toCsv(String fileName){
 		try {
 
-			FileWriter fw = new FileWriter("C:\\Users\\Doriya Spielman\\git\\OO_Project\\Output_Files\\"+fileName+".csv");
+			FileWriter fw = new FileWriter("Output_Files\\"+fileName);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.append("Time");bw.append(',');bw.append("ID");bw.append(','); bw.append("LAT");bw.append(',');
 			bw.append("LON"); bw.append(',');bw.append("ALT"); bw.append(',');bw.append("#WIFI NETWORKS");
