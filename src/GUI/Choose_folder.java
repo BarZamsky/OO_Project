@@ -18,7 +18,7 @@ public class Choose_folder extends JPanel implements ActionListener {
 	    go.addActionListener(this);
 	    add(go);
 	   }
-
+   
 	  public void actionPerformed(ActionEvent e) {
 	    chooser = new JFileChooser(); 
 	    chooser.setCurrentDirectory(new java.io.File("."));
