@@ -28,7 +28,9 @@ public class GUI_ex3{
 	private JFrame frame;
 	private Records _rec ;
 	private JTextField textField;
+	private JTextField textField2;
 	private String fileName="";
+	private String folderName="";
 	private String path="";
 	private String start="",start2="";
 	private String end="",end2="";
@@ -94,6 +96,12 @@ public class GUI_ex3{
 		textField.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 22));
 		IOpanel.setLayout(null);
 		IOpanel.add(textField);
+		
+		textField2 = new JTextField("");
+		textField2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 22));
+		IOpanel.setLayout(null);
+		IOpanel.add(textField2);
+
 
 		///buttons name:
 		JButton btnNameOfScv = new JButton("Name of CSV file",file);
@@ -143,22 +151,36 @@ public class GUI_ex3{
 		IOpanel.add(btnNameOfFolder);
 		btnNameOfFolder.setFont(new Font("Gisha", Font.PLAIN, 22));
 
-		Choose_folder panel = new Choose_folder();
-		btnNameOfFolder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnNameOfFolder.addMouseListener(new MouseAdapter() {
+		btnNameOfFolder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				textField2.setBounds(45, 150, 300, 35);
+				textField2.setBackground(Color.WHITE);
+				textField2.setColumns(20);
+				btnDelete.setEnabled(false);
+				btnInformation.setEnabled(false);
+				btnNameOfScv.setEnabled(false);
+				btnSaveAsKml.setEnabled(false);
+				btnSaveCombCsv.setEnabled(false);
+				textField2.addKeyListener(new KeyAdapter() {
 					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						JFrame frame = new JFrame("");
-						frame.getContentPane().add(panel,"Center");
-						frame.setSize(panel.getPreferredSize());
-						frame.setVisible(true);
+					public void keyPressed(KeyEvent evt) {
+						if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+							folderName = textField2.getText();
+							textField2.setVisible(false);
+							btnDelete.setEnabled(true);
+							btnInformation.setEnabled(true);
+							btnNameOfScv.setEnabled(true);
+							btnSaveAsKml.setEnabled(true);
+							btnSaveCombCsv.setEnabled(true);
+						}
 					}
-					
 				});
+				textField2.setVisible(true);
 			}
 		});
 
+		btnNameOfFolder.setVisible(true);
 		////////info////////
 		btnInformation.setBounds(400, 98, 261, 36);
 		IOpanel.add(btnInformation);
@@ -203,9 +225,8 @@ public class GUI_ex3{
 		btnSaveCombCsv.setFont(new Font("Gisha", Font.PLAIN, 22));
 		btnSaveCombCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			path=(String)panel.chooser.getSelectedFile().getAbsolutePath();
 				_rec = new Records();
-				_rec.parseFile(path);
+				_rec.parseFile(folderName);
 				_rec.toCsv(fileName+".csv");
 				JOptionPane.showMessageDialog(null, "Your CSV file is ready!");
 			}

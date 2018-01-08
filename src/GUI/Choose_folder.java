@@ -1,6 +1,8 @@
 package GUI;
 	import javax.swing.*;
-	import java.awt.event.*;
+import javax.swing.filechooser.FileSystemView;
+
+import java.awt.event.*;
 	import java.awt.*;
 /**
  * This class represent method to select folder from your PC	
@@ -8,10 +10,14 @@ package GUI;
  *
  */
 public class Choose_folder extends JPanel implements ActionListener {
-	   JButton go;
+	   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	JButton go;
 	   
 	   JFileChooser chooser;
-	   String choosertitle;
 	   
 	  public Choose_folder() {
 	    go = new JButton("Open path : ");
@@ -20,9 +26,9 @@ public class Choose_folder extends JPanel implements ActionListener {
 	   }
    
 	  public void actionPerformed(ActionEvent e) {
-	    chooser = new JFileChooser(); 
+	    chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()); 
 	    chooser.setCurrentDirectory(new java.io.File("."));
-	    chooser.setDialogTitle(choosertitle);
+	    chooser.setDialogTitle("Select folder:");
 	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 	    chooser.setAcceptAllFileFilterUsed(false);
 	    //    
