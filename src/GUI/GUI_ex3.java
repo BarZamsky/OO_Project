@@ -186,11 +186,9 @@ public class GUI_ex3{
 		btnInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int numR = _rec.getSize();
-				int mac = _rec.getNumMac(); ///
+				int mac = _rec.getNumMac(); 
 				JOptionPane.ICON_PROPERTY.toString();
 				JOptionPane.showMessageDialog(null, "You captured "+numR+" records\n You captured "+mac+" macs total in all the scans");
-			//	int mac = _rec.getNumMac();
-			//	JOptionPane.showMessageDialog(null, "You captured "+mac+" macs total in all the scans");
 			}
 		});
 
