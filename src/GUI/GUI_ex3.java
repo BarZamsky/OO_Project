@@ -3,7 +3,6 @@ package GUI;
 import Project.Algo_1;
 
 import Project.Records;
-import GUI.Choose_folder;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -102,7 +101,6 @@ public class GUI_ex3{
 		IOpanel.setLayout(null);
 		IOpanel.add(textField2);
 
-
 		///buttons name:
 		JButton btnNameOfScv = new JButton("Name of CSV file",file);
 		JButton btnNameOfFolder = new JButton("Choose folder",folder);
@@ -188,10 +186,11 @@ public class GUI_ex3{
 		btnInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int numR = _rec.getSize();
+				int mac = _rec.getNumMac(); ///
 				JOptionPane.ICON_PROPERTY.toString();
-				JOptionPane.showMessageDialog(null, "You captured "+numR+" records");
-				int mac = _rec.getNumMac();
-				JOptionPane.showMessageDialog(null, "You captured "+mac+" macs total in all the scans");
+				JOptionPane.showMessageDialog(null, "You captured "+numR+" records\n You captured "+mac+" macs total in all the scans");
+			//	int mac = _rec.getNumMac();
+			//	JOptionPane.showMessageDialog(null, "You captured "+mac+" macs total in all the scans");
 			}
 		});
 
@@ -675,7 +674,7 @@ public class GUI_ex3{
 			@Override
 			public void run() {
 				try {
-					Path path2 = Paths.get(path);
+					Path path2 = Paths.get(folderName);
 					WatchService watchService;
 					watchService = path2.getFileSystem().newWatchService();
 
@@ -699,7 +698,7 @@ public class GUI_ex3{
 								(event.kind().name().equals("ENTRY_MODIFY"))) {
 								JOptionPane.showMessageDialog(frame.getContentPane(),"Records Was Changed !!!","change",JOptionPane.WARNING_MESSAGE);
 								_rec = new Records();
-								_rec.parseFile(path);
+								_rec.parseFile(folderName);
 							}
 
 						}
