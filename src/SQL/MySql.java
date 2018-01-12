@@ -34,7 +34,7 @@ public class MySql {
 	private static String _password = "Lambda1();";
 	private static Connection _con = null;
 	private static String _tableName="";
-	
+	//////
 
 	public static void main(String[] args) {
 		List<LineFile> _line1 =	test_101("5.29.193.52", "jdbc:mysql://"+"5.29.193.52"+":3306/oop_course_ariel","oop1","Lambda1();","ex4_db");
