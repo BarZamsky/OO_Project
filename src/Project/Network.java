@@ -24,6 +24,10 @@ public class Network implements Comparable<Network> {
 		Chanel = chanel;
 		isTaken=false;
 	}
+	public Network(String _mac, int _rssi){
+		this.Mac=_mac;
+		this.Signal=_rssi;
+	}
 
 	public boolean isTaken(){
 		return isTaken;
@@ -66,6 +70,7 @@ public void setTaken(boolean isTaken) {
 	public String toString() {
 		return SSID+","+Mac+","+Signal+","+Chanel;
 	}
+	
 
 
 

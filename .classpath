@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/jaxb-api-2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/jaxb-impl-2.1.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/a/Desktop/שנה ב/סמסטר א/מונחה עצמים/api/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/a/git/OO_Project/ObjectOriented/Jar/mysql-connector-java-5.1.45-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

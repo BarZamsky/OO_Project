@@ -1,9 +1,7 @@
 package GUI;
-
 import Project.Algo_1;
-
+import Project.LineFile;
 import Project.Records;
-import GUI.Choose_folder;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +11,13 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.List;
 import java.awt.*;
 import Filters.filter_Rec;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import GUI.algo2;
+import SQL.MySql;
 /**
  * This class is the main GUI class to our project
  * @author Bar,Noy, Doriya
@@ -44,6 +43,12 @@ public class GUI_ex3{
 	private boolean not1=false;
 	private filter_Rec _filter;
 	private String gate = "";
+	private String _ip="";
+	private String _url="";
+	private String _password="";
+	private String _user="";
+	private String  _tableName="";
+	private List<LineFile> _line;
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +86,7 @@ public class GUI_ex3{
 		ImageIcon folder = new ImageIcon("icons_GUI\\folder.png");
 		ImageIcon kml = new ImageIcon("icons_GUI\\kml.png");
 		ImageIcon info = new ImageIcon("icons_GUI\\info.png");
+		ImageIcon sql = new ImageIcon("icons_GUI\\sql.png");
 		/////////////////////////////////////
 		/**
 		 * I/0 panel
@@ -98,18 +104,18 @@ public class GUI_ex3{
 		IOpanel.add(textField);
 		
 		textField2 = new JTextField("");
-		textField2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 22));
+		textField2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 14));
 		IOpanel.setLayout(null);
 		IOpanel.add(textField2);
 
-
 		///buttons name:
 		JButton btnNameOfScv = new JButton("Name of CSV file",file);
-		JButton btnNameOfFolder = new JButton("Choose folder",folder);
+		JButton btnNameOfFolder = new JButton("Enter path ",folder);
 		JButton btnInformation = new JButton("  Information",info);
 		JButton btnDelete = new JButton("  Delete the file",delete);
 		JButton btnSaveCombCsv = new JButton("Save as comb CSV",csv);
 		JButton btnSaveAsKml = new JButton("Save as KML file",kml);
+		JButton btnDataBase = new JButton("Read from DB",sql);
 
 		///name csv file ///
 		btnNameOfScv.setBounds(14, 5, 261, 35);
@@ -143,18 +149,18 @@ public class GUI_ex3{
 		});
 
 		IOpanel.add(btnNameOfScv);
-		btnNameOfScv.setFont(new Font("Gisha", Font.PLAIN, 22));
+		btnNameOfScv.setFont(new Font("Gisha", Font.BOLD, 22));
 		btnNameOfScv.setVisible(true);
 
 		//////folder//////
 		btnNameOfFolder.setBounds(14, 99, 261, 35);
 		IOpanel.add(btnNameOfFolder);
-		btnNameOfFolder.setFont(new Font("Gisha", Font.PLAIN, 22));
+		btnNameOfFolder.setFont(new Font("Gisha", Font.BOLD, 22));
 
 		btnNameOfFolder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				textField2.setBounds(45, 150, 300, 35);
+				textField2.setBounds(14, 150, 400, 35);
 				textField2.setBackground(Color.WHITE);
 				textField2.setColumns(20);
 				btnDelete.setEnabled(false);
@@ -184,21 +190,37 @@ public class GUI_ex3{
 		////////info////////
 		btnInformation.setBounds(400, 98, 261, 36);
 		IOpanel.add(btnInformation);
-		btnInformation.setFont(new Font("Gisha", Font.PLAIN, 22));
+		btnInformation.setFont(new Font("Gisha", Font.BOLD, 22));
 		btnInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int numR = _rec.getSize();
+				int mac = _rec.getNumMac(); 
 				JOptionPane.ICON_PROPERTY.toString();
-				JOptionPane.showMessageDialog(null, "You captured "+numR+" records");
-				int mac = _rec.getNumMac();
-				JOptionPane.showMessageDialog(null, "You captured "+mac+" macs total in all the scans");
+				JOptionPane.showMessageDialog(null, "You captured "+numR+" records\n You captured "+mac+" macs total in all the scans");
 			}
 		});
+	///////Data Base//////
+			btnDataBase.setBounds(400, 216, 261, 35);
+			IOpanel.add(btnDataBase);
+			btnDataBase.setFont(new Font("Gisha", Font.BOLD, 22));
+			btnDataBase.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					_ip= JOptionPane.showInputDialog(null, "Enter ip of the server : ", "DB_CONNECT",JOptionPane.QUESTION_MESSAGE);
+					_url= JOptionPane.showInputDialog(null, "Enter url : ", "DB_CONNECT",JOptionPane.QUESTION_MESSAGE);
+					_user= JOptionPane.showInputDialog(null, "Enter user : ", "DB_CONNECT",JOptionPane.QUESTION_MESSAGE);
+					_password= JOptionPane.showInputDialog(null, "Enter password : ", "DB_CONNECT",JOptionPane.QUESTION_MESSAGE);
+					_tableName= JOptionPane.showInputDialog(null, "Enter table to read : ", "DB_CONNECT",JOptionPane.QUESTION_MESSAGE);
+					_line = MySql.test_101(_ip, _url, _user, _password, _tableName);
+					_rec.addList(_line);
+					_rec.toCsv("DB_list.csv");
+					JOptionPane.showMessageDialog(null, "DB add to the Record and saved as new CSV file");	
+				}
+			});
 
 		/////delete button /////
 		btnDelete.setBounds(400, 5, 261, 35);
 		IOpanel.add(btnDelete);
-		btnDelete.setFont(new Font("Gisha", Font.PLAIN, 22));
+		btnDelete.setFont(new Font("Gisha", Font.BOLD, 22));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_rec = new Records();
@@ -211,7 +233,7 @@ public class GUI_ex3{
 		///// kml /////
 		btnSaveAsKml.setBounds(14, 216, 261, 35);
 		IOpanel.add(btnSaveAsKml);
-		btnSaveAsKml.setFont(new Font("Gisha", Font.PLAIN, 22));
+		btnSaveAsKml.setFont(new Font("Gisha", Font.BOLD, 22));
 		btnSaveAsKml.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_rec.csv2Kml(fileName+".kml");
@@ -222,7 +244,7 @@ public class GUI_ex3{
 		///// merge csv /////
 		btnSaveCombCsv.setBounds(14, 323, 261, 35);
 		IOpanel.add(btnSaveCombCsv);
-		btnSaveCombCsv.setFont(new Font("Gisha", Font.PLAIN, 22));
+		btnSaveCombCsv.setFont(new Font("Gisha", Font.BOLD, 22));
 		btnSaveCombCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_rec = new Records();
@@ -675,7 +697,7 @@ public class GUI_ex3{
 			@Override
 			public void run() {
 				try {
-					Path path2 = Paths.get(path);
+					Path path2 = Paths.get(folderName);
 					WatchService watchService;
 					watchService = path2.getFileSystem().newWatchService();
 
@@ -699,11 +721,9 @@ public class GUI_ex3{
 								(event.kind().name().equals("ENTRY_MODIFY"))) {
 								JOptionPane.showMessageDialog(frame.getContentPane(),"Records Was Changed !!!","change",JOptionPane.WARNING_MESSAGE);
 								_rec = new Records();
-								_rec.parseFile(path);
+								_rec.parseFile(folderName);
 							}
-
 						}
-						
 						if(!watchKey.reset()) {
 							watchKey.cancel();
 							watchService.close();

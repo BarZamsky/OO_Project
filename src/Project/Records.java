@@ -79,12 +79,20 @@ public class Records implements Functions{
 			System.exit(2);
 		}
 	}
+/**
+ * This function add a list from external database to the main Record
+ * @param list
+ */
+	
+	public void addList(List<LineFile> list){
+		for (LineFile lineFile : list) {
+			_rec.add(lineFile);
+		}
+	}
 	/**
 	 * This function changes the input CSV file according the new CSV file requires 
 	 * @param path folder location
 	 */
-	
-	
 	public void parseFile(String path){
 		try{
 			File f = new File(path);
