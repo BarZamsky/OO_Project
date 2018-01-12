@@ -60,17 +60,11 @@ public class MySql {
 				Time t = new Time();
 				t=t.set_Date(rs.getString(2));
 				String model = rs.getString(3);
-				System.out.println(model);
 				double lat = rs.getDouble(4);
-				System.out.println(lat);
 				double lon = rs.getDouble(5);
-				System.out.println(lon);
 				Point_2D _p = new Point_2D(lon, lat);
 				double alt = rs.getDouble(6);
 				int numNetworks= rs.getInt(7);
-				System.out.println(numNetworks);
-				System.out.println(rs.getString(8));
-				System.out.println(rs.getString(9));
 				List<Network> _net = new ArrayList<Network>();
 				for (int i = 8; i < rsmd.getColumnCount() ; i+=2) {
 					if(rs.getString(i) != null){

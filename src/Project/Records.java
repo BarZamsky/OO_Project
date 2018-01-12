@@ -55,7 +55,6 @@ public class Records implements Functions{
 	/**
 	 * This function reads CSV file
 	 * @param files the CSV 
-	 * @return List of strings[]
 	 */
 	@Override
 	public void readFile(String fileName){
@@ -69,8 +68,6 @@ public class Records implements Functions{
 				if(str[10].equals("WIFI")){
 					_file.add(str);
 				}
-				
-				
 			}
 			br.close();
 		}
