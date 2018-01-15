@@ -25,20 +25,22 @@ import Project.Time;
 import Project.Network;
 import Project.Point_2D;
 import java.sql.Statement;
-
+/**
+ * This class represent a method for reading data base from server and adding it to our record.
+ * @author Bar,Noy
+ *
+ */
 public class MySql {
-	/// חיבור לשרת של בועז 
+	// Boaz's connection details
 	private static String _ip = "5.29.193.52";
 	private static String _url = "jdbc:mysql://5.29.193.52:3306/oop_course_ariel";
 	private static String _user = "oop1";
 	private static String _password = "Lambda1();";
 	private static Connection _con = null;
 	private static String _tableName="";
-	//////
 
 	public static void main(String[] args) {
 		List<LineFile> _line1 =	test_101("5.29.193.52", "jdbc:mysql://"+"5.29.193.52"+":3306/oop_course_ariel","oop1","Lambda1();","ex4_db");
-		//;
 	}
 
 
