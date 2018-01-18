@@ -1,0 +1,29 @@
+/*
+*@@Bar
+*/
+apply plugin: 'java'
+apply plugin: 'eclipse' 
+
+repositories {
+    jcenter()
+}
+
+
+task fatJar(type: Jar){
+baseName = project.name
+from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+with jar
+manifest {
+
+	attributes 'Main-Class': 'GUI.GUI_ex3'
+	}
+	copy{
+	from "icons_GUI"
+	into "build/libs/icons_GUI"
+	}
+}
+
+dependencies {
+    compile fileTree(dir: 'Jar',include: ['*.jar'])
+    testCompile group: 'junit',name: 'junit', version: '4.12'
+	}
